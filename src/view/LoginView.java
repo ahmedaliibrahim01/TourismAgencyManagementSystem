@@ -19,7 +19,8 @@ public class LoginView extends Layout {
     private JButton btn_login;
     private JLabel lbl_pass;
     private JLabel lbl_user;
-    private UserManager userManager;
+    private final UserManager userManager;
+
 
     public LoginView(){
         this.userManager = new UserManager();
@@ -28,22 +29,22 @@ public class LoginView extends Layout {
 
         btn_login.addActionListener(e -> {
             if (Helper.isFieldEmpty(textField_username)){
-                JOptionPane.showMessageDialog(null,"Enter Username", "Error", JOptionPane.INFORMATION_MESSAGE);
+                Helper.showMsg("Enter Username");
             }else if (Helper.isFieldEmpty(passwordField)){
-                JOptionPane.showMessageDialog(null,"Enter Password", "Error", JOptionPane.INFORMATION_MESSAGE);
+                Helper.showMsg("Enter Password");
             } else {
-                User loginUser = this.userManager.findUser(this.textField_username.getText(),this.passwordField.getText());
+                User loginUser = this.userManager.findByLogin(this.textField_username.getText(),this.passwordField.getText());
                 if (loginUser == null){
-                    JOptionPane.showMessageDialog(null,"User not found");
+                    Helper.showMsg("User not found");
                 }else {
-                    if (loginUser.getRole() == User.Role.ADMIN) {
+                    if (loginUser.getRole().equals("Admin") || loginUser.getRole().equals("ADMIN") || loginUser.getRole().equals("admin")){
                         System.out.println(loginUser.getName() + " Admin entered");
-                            AdminView adminView = new AdminView(loginUser);
-                            adminView.setVisible(true);
-                    } else if (loginUser.getRole() == User.Role.EMPLOYEE) {
+                        UserManagementView adminView = new UserManagementView(loginUser);
+                        adminView.setVisible(true);
+                    } else {
                         System.out.println(loginUser.getName() + " Employee entered");
-                            UserManagementView adminView = new UserManagementView(loginUser);
-                            adminView.setVisible(true);
+                        AdminView adminView = new AdminView(loginUser);
+                        adminView.setVisible(true);
                     }
                 }
             }
