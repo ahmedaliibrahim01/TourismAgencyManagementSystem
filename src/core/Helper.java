@@ -6,8 +6,6 @@ import java.awt.*;
 public class Helper {
 
     public static void setTheme() {
-      //
-        optionPaneTR();
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 try {
@@ -21,41 +19,41 @@ public class Helper {
     }
 
     public static void showMsg(String str) {
-        String msg;
+        String Message;
         String title;
         switch (str) {
             case "fill" -> {
-                msg = "Lütfen tüm alanları doldurunuz !";
-                title = "Hata!";
+                Message = "Please fill in all fields!";
+                title = "Error";
             }
             case "done" -> {
-                msg = "İşlem Başarılı !";
-                title = "Sonuç";
+                Message = "Successful !";
+                title = "Result";
             }
             case "notFound" -> {
-                msg = "Kayıt bulunamadı !";
-                title = "Bulunamadı";
+                Message = "Not found !";
+                title = "Not found";
             }
             case "error" -> {
-                msg = "Hatalı işlem yaptınız !";
-                title = "Hata!";
+                Message = "You've made a mistake!";
+                title = "Error!";
             }
             default -> {
-                msg = str;
-                title = "Mesaj";
+                Message = str;
+                title = "Message";
             }
         }
-        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, Message, title, JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static boolean confirm(String str) {
+    public static boolean confirm(String str, String title) {
         String msg;
         if (str.equals("sure")) {
-            msg = "Bu işlemi yapmak istediğine emin misin ?";
+            msg = "Are you sure you want to do this ?";
         } else {
             msg = str;
         }
-        return JOptionPane.showConfirmDialog(null, msg, "Emin misin ?", JOptionPane.YES_NO_OPTION) == 0;
+        return JOptionPane.showConfirmDialog(null, msg, title, JOptionPane.YES_NO_OPTION) == 0;
     }
 
     public static boolean isFieldEmpty(JTextField field) {
@@ -77,9 +75,7 @@ public class Helper {
         };
     }
 
-    public static void optionPaneTR() {
-        UIManager.put("OptionPane.okButtonText", "Tamam");
-        UIManager.put("OptionPane.yesButtonText", "Evet");
-        UIManager.put("OptionPane.noButtonText", "Hayır");
+    public static String firstWordUpper(String str){
+        return str.substring(0,1).toUpperCase()+str.substring(1);
     }
 }
