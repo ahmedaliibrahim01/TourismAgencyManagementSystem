@@ -35,9 +35,16 @@ public class Layout extends JFrame {
         }
     }
 
-    public int getTableSelectedRow(JTable table, int index){
-        return Integer.parseInt(table.getValueAt(table.getSelectedRow(), index).toString());
+    int getTableSelectedRow(JTable table, int col_index){
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow != -1) {
+            return (int) table.getModel().getValueAt(selectedRow, col_index);
+        }
+        return -1; // veya başka bir varsayılan değer
     }
+
+
+
 
     public void tableRowSelect(JTable table){
         table.addMouseListener(new MouseAdapter() {

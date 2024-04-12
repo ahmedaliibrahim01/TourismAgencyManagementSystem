@@ -7,14 +7,17 @@ public class User {
 
     private String role;
 
-
-
-
     public User() {
     }
 
     public User(int id, String name, String password, String role) {
         this.id = id;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String name, String password, String role) {
         this.name = name;
         this.password = password;
         this.role = role;

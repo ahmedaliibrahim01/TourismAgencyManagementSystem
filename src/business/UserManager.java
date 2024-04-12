@@ -35,6 +35,17 @@ public class UserManager {
         }
         return this.userDao.update(user);
     }
+
+    public boolean delete(int id) {
+        if (this.getById(id) == null) {
+            Helper.showMsg(id + " ID registered user not found");
+            return false;
+        }
+
+        return this.userDao.delete(id);
+    }
+
+
     public ArrayList<Object[]> getForTable(int size) {
         ArrayList<Object[]> userRowList = new ArrayList<>();
         for (User obj : this.findAll()) {

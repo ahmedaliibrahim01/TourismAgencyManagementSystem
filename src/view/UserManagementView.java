@@ -10,7 +10,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class UserManagementView extends Layout{
-
     private JPanel container;
     private JTabbedPane tabbedPane_table_user;
     private JButton btn_update;
@@ -44,49 +43,115 @@ public class UserManagementView extends Layout{
 
         // User Managemenet
         loadUsersTable();
-        //loadUserComponent();
+        loadUserComponent();
+        loadUserComponentButtons();
+        this.tbl_users.setComponentPopupMenu(user_menu);
+        logout();
+    }
+
+    private void loadUserComponentButtons() {
+        btn_update.addActionListener(e -> {
+            int selectedUserId = this.getTableSelectedRow(tbl_users,0);
+            if (selectedUserId != -1) {
+                UserView userView = new UserView(this.userManager.getById(selectedUserId));
+                userView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        loadUsersTable();
+                    }
+                });
+            } else {
+                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            }
+
+        });
+
+        btn_delete.addActionListener(e -> {
+            int selectedUserId = this.getTableSelectedRow(tbl_users,0);
+            if (selectedUserId != -1){
+                if (Helper.confirm("sure","Delete")){
+                    if (this.userManager.delete(selectedUserId)){
+                        Helper.showMsg("done");
+                        loadUsersTable();
+                    }else {
+                        Helper.showMsg("error");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
+        btn_add.addActionListener(e -> {
+            int selectedUserId = this.getTableSelectedRow(tbl_users,0);
+            UserView userView = new UserView(this.userManager.getById(selectedUserId));
+            userView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadUsersTable();
+                }
+            });
+        });
+    }
+
+    private void loadUserComponent() {
         this.tbl_users.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_users.rowAtPoint(e.getPoint());
-                tbl_users.setRowSelectionInterval(selectedRow,selectedRow );
+                tbl_users.setRowSelectionInterval(selectedRow, selectedRow);
             }
         });
+
         this.user_menu = new JPopupMenu();
         this.user_menu.add("Add").addActionListener(e -> {
             UserView userView = new UserView(null);
+            userView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    loadUsersTable();
+                }
+            });
         });
+
         this.user_menu.add("Update").addActionListener(e -> {
-            int selectedUserId = Integer.parseInt(tbl_users.getValueAt(tbl_users.getSelectedRow(), 0).toString());
-            UserView userView = new UserView(this.userManager.getById(selectedUserId ));
-        });
-        this.user_menu.add("Delete").addActionListener(e -> {
-            int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to do this ?", "Delete", JOptionPane.YES_NO_OPTION);
-            if (result == JOptionPane.YES_OPTION) {
-                // Silme işlemini burada gerçekleştir
-                // Örneğin: deleteItem();
+            int selectedUserId = getTableSelectedRow(tbl_users, 0);
+            if (selectedUserId != -1) {
+                UserView userView = new UserView(userManager.getById(selectedUserId));
+                userView.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        loadUsersTable();
+                    }
+                });
+            } else {
+                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 
-        this.tbl_users.setComponentPopupMenu(user_menu);
+        this.user_menu.add("Delete").addActionListener(e -> {
+            int selectedUserId = this.getTableSelectedRow(tbl_users,0);
+            if (selectedUserId != -1){
+                if (Helper.confirm("sure","Delete")){
+                    if (this.userManager.delete(selectedUserId)){
+                        Helper.showMsg("done");
+                        loadUsersTable();
+                    }else {
+                        Helper.showMsg("error");
+                    }
+                }
+            }else {
+                // Satır seçili değilse, kullanıcıya bir uyarı gösterebilirsiniz.
+                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            }
 
-        // LogOut
-        logout();
-
+        });
     }
 
     private void loadUsersTable() {
         Object[] col_user_list = {"ID", "Name", "Password", "Role"};
         ArrayList<Object[]> userList = this.userManager.getForTable(col_user_list.length);
         this.createTable(this.tmdl_users, this.tbl_users, col_user_list, userList);
-    }
-
-
-    public void loadUsersFilter(){
-        this.cmbx_user_filter.addItem("ALL USERS");
-        this.cmbx_user_filter.addItem("ADMIN");
-        this.cmbx_user_filter.addItem("EMPLOYEE");
-        this.cmbx_user_filter.setSelectedItem("ALL USERS");
     }
 
     public void logout(){

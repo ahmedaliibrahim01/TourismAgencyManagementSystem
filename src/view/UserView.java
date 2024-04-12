@@ -16,33 +16,34 @@ public class UserView extends Layout{
     private JLabel lbl_username;
     private JLabel lbl_password;
     private JLabel lbl_role;
-    private JComboBox cmbx_role;
+    private JComboBox<String> cmbx_role;
     private UserManager userManager;
     private User user;
+    private DefaultComboBoxModel defaultComboBoxModel;
 
     public UserView(User user){
         this.userManager = new UserManager();
         this.user = user;
         this.add(container);
         this.guiInitilaze(300, 300);
+        this.defaultComboBoxModel = new DefaultComboBoxModel<>();
 
         if (user != null) {
             this.txtf_username.setText(user.getName());
             this.txtf_password.setText(user.getPassword());
-            this.cmbx_role.setToolTipText("ADMIN");
         }
         btn_user_save.addActionListener(e -> {
             if (Helper.isFieldEmpty(this.txtf_username) || Helper.isFieldEmpty(this.txtf_password)) {
                 Helper.showMsg("fill");
             } else {
-                boolean result = true;
+                boolean result = false;
                 if (this.user == null) {
-                    User obj = new User(txtf_username.getText(),txtf_password.getText());
+                    User obj = new User(txtf_username.getText(),txtf_password.getText(), (String) this.cmbx_role.getSelectedItem());
                     result = this.userManager.save(obj);
                 }else {
                     this.user.setName(txtf_username.getText());
                     this.user.setPassword(txtf_password.getText());
-                    this.user.setRole(cmbx_role.getName());
+                    this.user.setRole((String) cmbx_role.getSelectedItem());
                     this.userManager.update(this.user);
                 }
 
