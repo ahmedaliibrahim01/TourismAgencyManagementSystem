@@ -39,6 +39,11 @@ public class UserView extends Layout{
                 if (this.user == null) {
                     User obj = new User(txtf_username.getText(),txtf_password.getText());
                     result = this.userManager.save(obj);
+                }else {
+                    this.user.setName(txtf_username.getText());
+                    this.user.setPassword(txtf_password.getText());
+                    this.user.setRole(cmbx_role.getName());
+                    this.userManager.update(this.user);
                 }
 
                 if (result) {

@@ -42,6 +42,21 @@ public class UserDao {
         return true;
     }
 
+    public boolean update(User user) {
+        String query = "UPDATE public.user SET user_name = ?, user_password = ?, user_role = ? WHERE user_id = ?";
+        try {
+            PreparedStatement pr = this.connection.prepareStatement(query);
+            pr.setString(1, user.getName());
+            pr.setString(2, user.getPassword());
+            pr.setString(3, user.getRole());
+            pr.setInt(4, user.getId());
+            return pr.executeUpdate() != -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public User findByLogin(String username, String password) {
         User obj = null;
         String query = "SELECT * FROM public.user WHERE user_name = ? AND user_password = ?";
@@ -74,6 +89,8 @@ public class UserDao {
         }
         return obj;
     }
+    
+
     public User match(ResultSet rs) throws SQLException {
         User obj = new User();
         obj.setId(rs.getInt("user_id"));

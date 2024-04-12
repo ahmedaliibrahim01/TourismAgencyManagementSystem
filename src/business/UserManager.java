@@ -4,6 +4,8 @@ import core.Helper;
 import dao.UserDao;
 import entity.User;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserManager {
@@ -25,6 +27,13 @@ public class UserManager {
             Helper.showMsg("error");
         }
         return this.userDao.save(user);
+    }
+
+    public boolean update(User user) {
+        if (this.getById(user.getId()) == null) {
+            Helper.showMsg("notFound");
+        }
+        return this.userDao.update(user);
     }
     public ArrayList<Object[]> getForTable(int size) {
         ArrayList<Object[]> userRowList = new ArrayList<>();

@@ -57,7 +57,8 @@ public class UserManagementView extends Layout{
             UserView userView = new UserView(null);
         });
         this.user_menu.add("Update").addActionListener(e -> {
-            UserView userView = new UserView(this.user);
+            int selectedUserId = Integer.parseInt(tbl_users.getValueAt(tbl_users.getSelectedRow(), 0).toString());
+            UserView userView = new UserView(this.userManager.getById(selectedUserId ));
         });
         this.user_menu.add("Delete").addActionListener(e -> {
             int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to do this ?", "Delete", JOptionPane.YES_NO_OPTION);
