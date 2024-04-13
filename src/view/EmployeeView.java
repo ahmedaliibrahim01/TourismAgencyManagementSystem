@@ -1,16 +1,19 @@
 package view;
 
+import business.HotelManager;
 import entity.User;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class EmployeeView extends Layout{
     private JPanel container;
     private JTabbedPane tabbedPane_hotel;
     private JButton btn_employee_logout;
-    private JTable tbl_hotel;
+    private JTable tbl_hotels;
     private JLabel lbl_employee_panel;
     private JLabel lbl_employee_welcome;
     private JPanel pnl_hotel;
@@ -30,12 +33,41 @@ public class EmployeeView extends Layout{
     private JButton btn_hotel_add;
     private JLabel lbl_hotel_add;
     private User user;
+    private DefaultTableModel tmdl_hotels = new DefaultTableModel();
+
+    private HotelManager hotelManager;
     public EmployeeView(User user) {
+        this.hotelManager = new HotelManager();
         this.add(container);
         this.guiInitilaze(1000, 500);
-        btn_employee_logout.addActionListener(e -> {
-            LoginView loginView = new LoginView();
-            dispose();
+
+        // Hotel Management
+        loadHotelsTable();
+        loadUserComponent();
+
+
+        logout();
+    }
+    private void loadHotelsTable() {
+        Object[] col_hotel_list = {"ID", "Name"};
+        ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel_list.length);
+        this.createTable(this.tmdl_hotels, this.tbl_hotels, col_hotel_list, hotelList);
+    }
+
+    private void loadUserComponent() {
+        this.tbl_hotels.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_hotels.rowAtPoint(e.getPoint());
+                tbl_hotels.setRowSelectionInterval(selectedRow, selectedRow);
+            }
         });
     }
+    public void logout(){
+        btn_employee_logout.addActionListener(e -> {
+            dispose();
+            LoginView loginView = new LoginView();
+        });
+    }
+
 }

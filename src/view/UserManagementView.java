@@ -46,7 +46,7 @@ public class UserManagementView extends Layout{
         }
         this.lbl_welcome.setText("Welcome :  " + Helper.firstWordUpper(this.user.getName()));
 
-        // User Managemenet
+        // User Management
         loadUsersTable();
         loadUserComponent();
         loadUserComponentButtons();
@@ -145,7 +145,6 @@ public class UserManagementView extends Layout{
                     }
                 }
             }else {
-                // Satır seçili değilse, kullanıcıya bir uyarı gösterebilirsiniz.
                 JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
 

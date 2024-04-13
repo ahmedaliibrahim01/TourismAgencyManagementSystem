@@ -172,7 +172,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="e1a84" class="javax.swing.JTable" binding="tbl_hotel">
+                      <component id="e1a84" class="javax.swing.JTable" binding="tbl_hotels">
                         <constraints/>
                         <properties/>
                       </component>
