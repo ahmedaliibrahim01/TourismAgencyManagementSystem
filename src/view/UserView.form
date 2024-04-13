@@ -79,8 +79,8 @@
         </constraints>
         <properties>
           <model>
-            <item value="ADMIN"/>
             <item value="EMPLOYEE"/>
+            <item value="ADMIN"/>
           </model>
         </properties>
       </component>

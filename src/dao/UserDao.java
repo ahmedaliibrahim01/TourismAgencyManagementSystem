@@ -34,7 +34,7 @@ public class UserDao {
             PreparedStatement pr = this.connection.prepareStatement(query);
             pr.setString(1, user.getName());
             pr.setString(2, user.getPassword());
-            pr.setString(3, user.getRole());
+            pr.setString(3, user.getRole().toString());
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -48,7 +48,7 @@ public class UserDao {
             PreparedStatement pr = this.connection.prepareStatement(query);
             pr.setString(1, user.getName());
             pr.setString(2, user.getPassword());
-            pr.setString(3, user.getRole());
+            pr.setString(3, user.getRole().toString());
             pr.setInt(4, user.getId());
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class UserDao {
         obj.setId(rs.getInt("user_id"));
         obj.setName(rs.getString("user_name"));
         obj.setPassword(rs.getString("user_password"));
-        obj.setRole(rs.getString("user_role"));
+        obj.setRole(User.Role.valueOf(rs.getString("user_role")));
         return obj;
     }
 }

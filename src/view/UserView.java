@@ -38,12 +38,12 @@ public class UserView extends Layout{
             } else {
                 boolean result = true;
                 if (this.user == null) {
-                    User obj = new User(txtf_username.getText(),txtf_password.getText(), (String) this.cmbx_role.getSelectedItem());
+                    User obj = new User(txtf_username.getText(),txtf_password.getText(), (User.Role) this.cmbx_role.getSelectedItem());
                     result = this.userManager.save(obj);
                 }else {
                     this.user.setName(txtf_username.getText());
                     this.user.setPassword(txtf_password.getText());
-                    this.user.setRole((String) cmbx_role.getSelectedItem());
+                    this.user.setRole(User.Role.valueOf((String) cmbx_role.getSelectedItem()));
                     this.userManager.update(this.user);
                 }
 

@@ -3,12 +3,12 @@
   <grid id="27dc6" binding="container" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="536" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <component id="63098" class="javax.swing.JLabel" binding="btn_employee_panel">
+      <component id="be786" class="javax.swing.JLabel" binding="lbl_employee_panel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -17,16 +17,16 @@
           <text value="Employee Panel"/>
         </properties>
       </component>
-      <component id="8707b" class="javax.swing.JLabel" binding="lbl_welcome">
+      <component id="148d9" class="javax.swing.JLabel" binding="lbl_employee_welcome">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font style="1"/>
-          <text value="Welcome : User"/>
+          <text value="Welcome Back : username"/>
         </properties>
       </component>
-      <tabbedpane id="6a7d" binding="tabbedPane_hotel">
+      <tabbedpane id="21d22" binding="tabbedPane_hotel">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="200"/>
@@ -35,57 +35,129 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="37db2" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="39d94" binding="pnl_hotel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <tabbedpane title="Untitled"/>
+              <tabbedpane title="Hotels"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="fffa9" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+              <grid id="f277d" binding="pnl_hotel_filter" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="10" right="10"/>
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="2477e" class="javax.swing.JButton" binding="button1" default-binding="true">
+                  <grid id="31c14" binding="pnl_hotel_view" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <text value="Button"/>
-                    </properties>
-                  </component>
-                  <component id="fda5f" class="javax.swing.JButton" binding="button2" default-binding="true">
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="65f27" class="javax.swing.JLabel" binding="lbl_hotel_view">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="View Hotel Details"/>
+                        </properties>
+                      </component>
+                      <component id="ae2b4" class="javax.swing.JButton" binding="btn_hotel_view">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="View"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="7883" binding="pnl_hotel_update" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <text value="Button"/>
-                    </properties>
-                  </component>
-                  <component id="b144f" class="javax.swing.JButton" binding="button3" default-binding="true">
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="ec5c9" class="javax.swing.JLabel" binding="lbl_hotel_update">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Update Hotel Information"/>
+                        </properties>
+                      </component>
+                      <component id="570e0" class="javax.swing.JButton" binding="btn_hotel_update">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Update"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="7aa82" binding="pnl_hotel_delete" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <text value="Button"/>
-                    </properties>
-                  </component>
-                  <component id="44c84" class="javax.swing.JButton" binding="button4" default-binding="true">
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="6040" class="javax.swing.JLabel" binding="lbl_hotel_delete">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Delete Hotel"/>
+                        </properties>
+                      </component>
+                      <component id="7161e" class="javax.swing.JButton" binding="btn_hotel_delete">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Delete"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="64175" binding="pnl_hotel_add" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <text value="Button"/>
-                    </properties>
-                  </component>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="30633" class="javax.swing.JLabel" binding="lbl_hotel_add">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Add New Hotel"/>
+                        </properties>
+                      </component>
+                      <component id="aad05" class="javax.swing.JButton" binding="btn_hotel_add">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Add"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
                 </children>
               </grid>
-              <grid id="3a89d" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="cd754" binding="pnl_hotel_table" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -93,14 +165,14 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <scrollpane id="6be3e">
+                  <scrollpane id="23d3f" binding="scrl_hotel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="a6d26" class="javax.swing.JTable" binding="table1" default-binding="true">
+                      <component id="e1a84" class="javax.swing.JTable" binding="tbl_hotel">
                         <constraints/>
                         <properties/>
                       </component>
@@ -112,12 +184,12 @@
           </grid>
         </children>
       </tabbedpane>
-      <component id="9277a" class="javax.swing.JButton" binding="button5" default-binding="true">
+      <component id="62430" class="javax.swing.JButton" binding="btn_employee_logout">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Logout"/>
         </properties>
       </component>
     </children>

@@ -37,7 +37,7 @@ public class LoginView extends Layout {
                 if (loginUser == null){
                     Helper.showMsg("User not found");
                 }else {
-                    if (loginUser.getRole().equals("Admin") || loginUser.getRole().equals("ADMIN") || loginUser.getRole().equals("admin")){
+                    if (loginUser.getRole().toString().equals("Admin") || loginUser.getRole().toString().equals("ADMIN") || loginUser.getRole().toString().equals("admin")) {
                         UserManagementView adminView = new UserManagementView(loginUser);
                         adminView.setVisible(true);
                         dispose();
