@@ -38,13 +38,13 @@ public class LoginView extends Layout {
                     Helper.showMsg("User not found");
                 }else {
                     if (loginUser.getRole().equals("Admin") || loginUser.getRole().equals("ADMIN") || loginUser.getRole().equals("admin")){
-                        System.out.println(loginUser.getName() + " Admin entered");
                         UserManagementView adminView = new UserManagementView(loginUser);
                         adminView.setVisible(true);
+                        dispose();
                     } else {
-                        System.out.println(loginUser.getName() + " Employee entered");
-                        AdminView adminView = new AdminView(loginUser);
+                        EmployeeView adminView = new EmployeeView(loginUser);
                         adminView.setVisible(true);
+                        dispose();
                     }
                 }
             }

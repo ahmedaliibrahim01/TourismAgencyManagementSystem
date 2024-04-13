@@ -6,6 +6,7 @@ import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -25,6 +26,9 @@ public class UserManagementView extends Layout{
     private JPanel pnl_filter;
     private JPanel pnl_table_user;
     private JScrollPane scrl_table;
+    private JLabel lbl_filter;
+    private JTextField txtf_selected_id;
+    private JLabel lbl_ID;
     private JPopupMenu user_menu;
     private Object[] col_model;
     private User user;
@@ -35,6 +39,7 @@ public class UserManagementView extends Layout{
         this.userManager = new UserManager();
         this.add(container);
         this.guiInitilaze(1000, 500);
+        container.setPreferredSize(new Dimension(1000,500));
         this.user = user;
         if (this.user == null) {
             dispose();
@@ -83,8 +88,7 @@ public class UserManagementView extends Layout{
         });
 
         btn_add.addActionListener(e -> {
-            int selectedUserId = this.getTableSelectedRow(tbl_users,0);
-            UserView userView = new UserView(this.userManager.getById(selectedUserId));
+            UserView userView = new UserView(null);
             userView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {

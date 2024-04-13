@@ -36,7 +36,7 @@ public class UserView extends Layout{
             if (Helper.isFieldEmpty(this.txtf_username) || Helper.isFieldEmpty(this.txtf_password)) {
                 Helper.showMsg("fill");
             } else {
-                boolean result = false;
+                boolean result = true;
                 if (this.user == null) {
                     User obj = new User(txtf_username.getText(),txtf_password.getText(), (String) this.cmbx_role.getSelectedItem());
                     result = this.userManager.save(obj);
