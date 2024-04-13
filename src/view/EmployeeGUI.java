@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class EmployeeView extends Layout{
+public class EmployeeGUI extends Layout{
     private JPanel container;
     private JTabbedPane tabbedPane_hotel;
     private JButton btn_employee_logout;
@@ -36,7 +36,7 @@ public class EmployeeView extends Layout{
     private DefaultTableModel tmdl_hotels = new DefaultTableModel();
 
     private HotelManager hotelManager;
-    public EmployeeView(User user) {
+    public EmployeeGUI(User user) {
         this.hotelManager = new HotelManager();
         this.add(container);
         this.guiInitilaze(1000, 500);
@@ -66,7 +66,7 @@ public class EmployeeView extends Layout{
     public void logout(){
         btn_employee_logout.addActionListener(e -> {
             dispose();
-            LoginView loginView = new LoginView();
+            LoginGUI loginView = new LoginGUI();
         });
     }
 

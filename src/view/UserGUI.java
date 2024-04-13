@@ -6,7 +6,7 @@ import entity.User;
 
 import javax.swing.*;
 
-public class UserView extends Layout{
+public class UserGUI extends Layout{
 
     private JPanel container;
     private JTextField txtf_username;
@@ -21,7 +21,7 @@ public class UserView extends Layout{
     private User user;
     private DefaultComboBoxModel defaultComboBoxModel;
 
-    public UserView(User user){
+    public UserGUI(User user){
         this.userManager = new UserManager();
         this.user = user;
         this.add(container);

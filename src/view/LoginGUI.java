@@ -6,7 +6,7 @@ import entity.User;
 
 import javax.swing.*;
 
-public class LoginView extends Layout {
+public class LoginGUI extends Layout {
 
     private JPanel container;
     private JPanel user_login;
@@ -22,7 +22,7 @@ public class LoginView extends Layout {
     private final UserManager userManager;
 
 
-    public LoginView(){
+    public LoginGUI(){
         this.userManager = new UserManager();
         add(container);
         this.guiInitilaze(400, 400);
@@ -38,11 +38,11 @@ public class LoginView extends Layout {
                     Helper.showMsg("User not found");
                 }else {
                     if (loginUser.getRole().toString().equals("Admin") || loginUser.getRole().toString().equals("ADMIN") || loginUser.getRole().toString().equals("admin")) {
-                        UserManagementView adminView = new UserManagementView(loginUser);
+                        UserManagementGUI adminView = new UserManagementGUI(loginUser);
                         adminView.setVisible(true);
                         dispose();
                     } else {
-                        EmployeeView adminView = new EmployeeView(loginUser);
+                        EmployeeGUI adminView = new EmployeeGUI(loginUser);
                         adminView.setVisible(true);
                         dispose();
                     }

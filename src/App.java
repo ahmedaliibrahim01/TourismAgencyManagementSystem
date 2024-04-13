@@ -1,8 +1,8 @@
+import business.HotelManager;
 import business.UserManager;
 import core.Helper;
-import view.EmployeeView;
-import view.UserManagementView;
-import view.UserView;
+import view.EmployeeGUI;
+import view.HotelAddUpdateGUI;
 
 public class App {
     public static void main(String[] args) {
@@ -10,6 +10,7 @@ public class App {
         //LoginView loginView = new LoginView();
         UserManager userManager = new UserManager();
         //UserManagementView userManagementView = new UserManagementView(userManager.findByLogin("ahmed","2024"));
-        EmployeeView adminView = new EmployeeView(userManager.findByLogin("ahmed","2025"));
+        EmployeeGUI adminView = new EmployeeGUI(userManager.findByLogin("ahmed","2025"));
+        HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(userManager.findByLogin("ahmed","2024"));
     }
 }

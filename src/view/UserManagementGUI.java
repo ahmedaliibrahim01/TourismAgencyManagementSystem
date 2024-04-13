@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class UserManagementView extends Layout{
+public class UserManagementGUI extends Layout{
     private JPanel container;
     private JTabbedPane tabbedPane_table_user;
     private JButton btn_update;
@@ -35,7 +35,7 @@ public class UserManagementView extends Layout{
     private DefaultTableModel tmdl_users = new DefaultTableModel();
     private UserManager userManager;
 
-    public UserManagementView(User user) {
+    public UserManagementGUI(User user) {
         this.userManager = new UserManager();
         this.add(container);
         this.guiInitilaze(1000, 500);
@@ -58,7 +58,7 @@ public class UserManagementView extends Layout{
         btn_update.addActionListener(e -> {
             int selectedUserId = this.getTableSelectedRow(tbl_users,0);
             if (selectedUserId != -1) {
-                UserView userView = new UserView(this.userManager.getById(selectedUserId));
+                UserGUI userView = new UserGUI(this.userManager.getById(selectedUserId));
                 userView.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
@@ -66,7 +66,7 @@ public class UserManagementView extends Layout{
                     }
                 });
             } else {
-                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
 
         });
@@ -83,12 +83,12 @@ public class UserManagementView extends Layout{
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 
         btn_add.addActionListener(e -> {
-            UserView userView = new UserView(null);
+            UserGUI userView = new UserGUI(null);
             userView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -109,7 +109,7 @@ public class UserManagementView extends Layout{
 
         this.user_menu = new JPopupMenu();
         this.user_menu.add("Add").addActionListener(e -> {
-            UserView userView = new UserView(null);
+            UserGUI userView = new UserGUI(null);
             userView.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -121,7 +121,7 @@ public class UserManagementView extends Layout{
         this.user_menu.add("Update").addActionListener(e -> {
             int selectedUserId = getTableSelectedRow(tbl_users, 0);
             if (selectedUserId != -1) {
-                UserView userView = new UserView(userManager.getById(selectedUserId));
+                UserGUI userView = new UserGUI(userManager.getById(selectedUserId));
                 userView.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
@@ -129,7 +129,7 @@ public class UserManagementView extends Layout{
                     }
                 });
             } else {
-                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 
@@ -145,7 +145,7 @@ public class UserManagementView extends Layout{
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(UserManagementView.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
 
         });
@@ -160,7 +160,7 @@ public class UserManagementView extends Layout{
     public void logout(){
         btn_logout.addActionListener(e -> {
             dispose();
-            LoginView loginView = new LoginView();
+            LoginGUI loginView = new LoginGUI();
         });
     }
 }
