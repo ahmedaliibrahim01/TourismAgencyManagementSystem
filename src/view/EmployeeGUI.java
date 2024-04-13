@@ -5,6 +5,7 @@ import entity.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ public class EmployeeGUI extends Layout{
     public EmployeeGUI(User user) {
         this.hotelManager = new HotelManager();
         this.add(container);
-        this.guiInitilaze(1000, 500);
+        this.guiInitilaze(1000, 700);
+        container.setPreferredSize(new Dimension(1000,700));
 
         // Hotel Management
         loadHotelsTable();
