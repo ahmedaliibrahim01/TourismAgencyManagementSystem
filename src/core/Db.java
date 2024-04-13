@@ -19,10 +19,8 @@ public class Db {
 
     private Db() {
         try {
-            System.out.println("Connection is successful");
             this.connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASS);
         } catch (SQLException e) {
-            System.out.println("Connection is not successful");
             System.out.println(e.getMessage());
         }
     }

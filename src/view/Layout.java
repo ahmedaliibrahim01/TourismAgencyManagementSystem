@@ -4,6 +4,7 @@ import core.Helper;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -43,9 +44,6 @@ public class Layout extends JFrame {
         return -1; // veya başka bir varsayılan değer
     }
 
-
-
-
     public void tableRowSelect(JTable table){
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -54,5 +52,14 @@ public class Layout extends JFrame {
                 table.setRowSelectionInterval(selected_row, selected_row);
             }
         });
+    }
+
+    public void printFrameSize(JFrame frame) {
+        Dimension size = frame.getSize();
+        System.out.println("Dimension is: " + size);
+    }
+    public void printFrameSize(JPanel frame) {
+        Dimension size = frame.getSize();
+        System.out.println("Dimension is: " + size);
     }
 }

@@ -40,12 +40,13 @@ public class EmployeeGUI extends Layout{
     public EmployeeGUI(User user) {
         this.hotelManager = new HotelManager();
         this.add(container);
-        this.guiInitilaze(1000, 700);
-        container.setPreferredSize(new Dimension(1000,700));
+        this.guiInitilaze(1000, 720);
+        container.setPreferredSize(new Dimension(1000,720));
 
         // Hotel Management
         loadHotelsTable();
-        loadUserComponent();
+        loadHotelComponent();
+        reComponent();
 
 
         logout();
@@ -56,7 +57,7 @@ public class EmployeeGUI extends Layout{
         this.createTable(this.tmdl_hotels, this.tbl_hotels, col_hotel_list, hotelList);
     }
 
-    private void loadUserComponent() {
+    private void loadHotelComponent() {
         this.tbl_hotels.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -72,4 +73,10 @@ public class EmployeeGUI extends Layout{
         });
     }
 
+    public void reComponent() {
+        this.tbl_hotels.setPreferredSize(new Dimension(tbl_hotels.getWidth(), 435));
+        this.tbl_hotels.revalidate();
+        this.tbl_hotels.repaint();
+
+    }
 }
