@@ -56,7 +56,7 @@ public class EmployeeGUI extends Layout{
         // Hotel Management
         loadHotelsTable();
         loadHotelComponent();
-        reComponent();
+
 
 
         logout();
@@ -65,6 +65,7 @@ public class EmployeeGUI extends Layout{
         Object[] col_hotel_list = {"ID", "Name", "City", "Region", "Full Address", "Phone", "Email", "Star"};
         ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel_list.length);
         this.createTable(this.tmdl_hotels, this.tbl_hotels, col_hotel_list, hotelList);
+        reComponent();
     }
 
     private void loadHotelComponent() {
@@ -73,6 +74,7 @@ public class EmployeeGUI extends Layout{
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_hotels.rowAtPoint(e.getPoint());
                 tbl_hotels.setRowSelectionInterval(selectedRow, selectedRow);
+                reComponent();
             }
         });
 
@@ -104,13 +106,17 @@ public class EmployeeGUI extends Layout{
         btn_hotel_delete.addActionListener(e -> {
             int selectedHotelId = this.getTableSelectedRow(tbl_hotels,0);
             if (selectedHotelId != -1) {
+                HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(this.hotelManager.getById(selectedHotelId));
                 if (Helper.confirm("sure","Delete")) {
                     if (this.hotelManager.delete(selectedHotelId)) {
                         Helper.showMsg("done");
+                        hotelAddUpdateGUI.dispose();
                         loadHotelsTable();
                     } else {
                         Helper.showMsg("error");
                     }
+                }else {
+                    hotelAddUpdateGUI.dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);

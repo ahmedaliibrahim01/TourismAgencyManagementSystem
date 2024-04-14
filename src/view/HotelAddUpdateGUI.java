@@ -20,10 +20,10 @@ public class HotelAddUpdateGUI extends Layout {
     private JTextField txtf_hotel_email;
     private JTextField txtf_hotel_phone;
     private JTextField txtf_hotel_star;
-    private JButton addButton;
-    private JButton removeButton;
-    private JButton addButton1;
-    private JButton removeButton1;
+    private JButton btn_add_facility;
+    private JButton btn_remove_facility;
+    private JButton btn_add_pension;
+    private JButton btn_remove_pension;
     private JTable tbl_facilities;
     private JLabel lbl_hotel_add_update;
     private JLabel lbl_hotel_name;
@@ -43,7 +43,7 @@ public class HotelAddUpdateGUI extends Layout {
     private JTabbedPane tabbedPane4;
     private JTable table4;
     private JPanel unf_panel;
-    private JButton saveButton;
+    private JButton btn_save_hotel;
     private DefaultTableModel tmdl_users = new DefaultTableModel();
     private Hotel hotel;
     private FacilityManager facilityManager;
@@ -58,7 +58,7 @@ public class HotelAddUpdateGUI extends Layout {
 
         this.hotel = hotel;
 
-        if (hotel != null) {
+        if (this.hotel != null) {
             this.txtf_hotel_name.setText(hotel.getName());
             this.txtf_hotel_city.setText(hotel.getCity());
             this.txtf_hotel_region.setText(hotel.getRegion());
@@ -67,7 +67,6 @@ public class HotelAddUpdateGUI extends Layout {
             this.txtf_hotel_phone.setText(hotel.getPhone());
             this.txtf_hotel_star.setText(hotel.getStar());
         }
-
         // Hotel Management
         loadHotelComponent();
 
@@ -79,7 +78,7 @@ public class HotelAddUpdateGUI extends Layout {
     }
 
     private void loadHotelComponent() {
-        this.saveButton.addActionListener(e -> {
+        this.btn_save_hotel.addActionListener(e -> {
             if (Helper.isFieldEmpty(this.txtf_hotel_name)
                     || Helper.isFieldEmpty(this.txtf_hotel_city)
                     || Helper.isFieldEmpty(this.txtf_hotel_region)

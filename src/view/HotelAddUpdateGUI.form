@@ -269,7 +269,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="6a634" class="javax.swing.JButton" binding="addButton" default-binding="true">
+                  <component id="6a634" class="javax.swing.JButton" binding="btn_add_facility">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -277,7 +277,7 @@
                       <text value="Add"/>
                     </properties>
                   </component>
-                  <component id="553fa" class="javax.swing.JButton" binding="removeButton" default-binding="true">
+                  <component id="553fa" class="javax.swing.JButton" binding="btn_remove_facility">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -393,7 +393,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="7ec5f" class="javax.swing.JButton" binding="addButton1" default-binding="true">
+                  <component id="7ec5f" class="javax.swing.JButton" binding="btn_add_pension">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -401,7 +401,7 @@
                       <text value="Add"/>
                     </properties>
                   </component>
-                  <component id="1f353" class="javax.swing.JButton" binding="removeButton1" default-binding="true">
+                  <component id="1f353" class="javax.swing.JButton" binding="btn_remove_pension">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -423,7 +423,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <component id="53095" class="javax.swing.JButton" binding="saveButton" default-binding="true">
+          <component id="53095" class="javax.swing.JButton" binding="btn_save_hotel">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
