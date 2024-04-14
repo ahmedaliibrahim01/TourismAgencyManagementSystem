@@ -1,9 +1,7 @@
 package business;
 
 import dao.FacilityDao;
-import dao.HotelDao;
 import entity.Facility;
-import entity.Hotel;
 
 import java.util.ArrayList;
 

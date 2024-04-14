@@ -1,8 +1,6 @@
 package business;
 
-import dao.FacilityDao;
 import dao.PensionTypeDao;
-import entity.Facility;
 import entity.PensionType;
 
 import java.util.ArrayList;

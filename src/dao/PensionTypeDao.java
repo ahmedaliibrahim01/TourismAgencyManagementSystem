@@ -1,7 +1,6 @@
 package dao;
 
 import core.Db;
-import entity.Facility;
 import entity.PensionType;
 
 import java.sql.Connection;

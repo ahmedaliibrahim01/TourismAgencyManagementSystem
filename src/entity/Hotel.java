@@ -4,6 +4,7 @@ public class Hotel {
     private int id;
     private String name;
     private String city;
+    private String region;
     private String fullAddress;
     private String phone;
     private String email;
@@ -12,10 +13,21 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String city, String fullAddress, String phone, String email, String star) {
+    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star) {
         this.id = id;
         this.name = name;
         this.city = city;
+        this.region = region;
+        this.fullAddress = fullAddress;
+        this.phone = phone;
+        this.email = email;
+        this.star = star;
+    }
+
+    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star) {
+        this.name = name;
+        this.city = city;
+        this.region = region;
         this.fullAddress = fullAddress;
         this.phone = phone;
         this.email = email;
@@ -44,6 +56,14 @@ public class Hotel {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getFullAddress() {
@@ -84,6 +104,7 @@ public class Hotel {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city='" + city + '\'' +
+                ", region='" + region + '\'' +
                 ", fullAddress='" + fullAddress + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +

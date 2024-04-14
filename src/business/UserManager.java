@@ -4,8 +4,6 @@ import core.Helper;
 import dao.UserDao;
 import entity.User;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserManager {
