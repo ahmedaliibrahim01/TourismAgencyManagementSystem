@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Hotel {
     private int id;
@@ -11,12 +12,12 @@ public class Hotel {
     private String phone;
     private String email;
     private String star;
-    private ArrayList<String> facilities;
+    private String[] facilities;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, ArrayList<String> facilities) {
+    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -28,7 +29,7 @@ public class Hotel {
         this.facilities = facilities;
     }
 
-    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, ArrayList<String> facilities) {
+    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
         this.name = name;
         this.city = city;
         this.region = region;
@@ -113,11 +114,11 @@ public class Hotel {
         this.star = star;
     }
 
-    public ArrayList<String> getFacilities() {
+    public String[] getFacilities() {
         return facilities;
     }
 
-    public void setFacilities(ArrayList<String> facilities) {
+    public void setFacilities(String[] facilities) {
         this.facilities = facilities;
     }
 
@@ -132,7 +133,7 @@ public class Hotel {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", star='" + star + '\'' +
-                ", facilities=" + facilities +
+                ", facilities=" + Arrays.toString(facilities) +
                 '}';
     }
 }
