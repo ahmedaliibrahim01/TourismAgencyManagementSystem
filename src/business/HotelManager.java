@@ -55,6 +55,16 @@ public class HotelManager {
         }
         return hotelRowList;
     }
+    public ArrayList<Object[]> getForTableFacilities(int size) {
+        ArrayList<Object[]> facilityRowList = new ArrayList<>();
+        for (Hotel obj : this.findAll()) {
+            int i = 0;
+            Object[] rowObject = new Object[size];
+            rowObject[i++] = obj.getFacilities();
+            facilityRowList.add(rowObject);
+        }
+        return facilityRowList;
+    }
     public Hotel getById(int id) {
         return this.hotelDao.getById(id);
     }

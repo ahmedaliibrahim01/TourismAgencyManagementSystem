@@ -16,9 +16,9 @@ public class FacilityDao {
 
     public ArrayList<Facility> findAll() {
         ArrayList<Facility> facilityList = new ArrayList<>();
-        String sql = "SELECT * FROM public.facility ORDER BY facility_id ASC";
+        String query = "SELECT * FROM public.facility ORDER BY facility_id ASC";
         try {
-            ResultSet rs = this.connection.createStatement().executeQuery(sql);
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
             while (rs.next()) {
                 facilityList.add(this.match(rs));
             }
@@ -27,6 +27,7 @@ public class FacilityDao {
         }
         return facilityList;
     }
+
 
     public Facility match(ResultSet rs) throws SQLException {
         Facility obj = new Facility();

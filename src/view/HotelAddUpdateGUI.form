@@ -249,7 +249,7 @@
                             <properties/>
                             <border type="none"/>
                             <children>
-                              <component id="d6231" class="javax.swing.JTable" binding="table2" default-binding="true">
+                              <component id="d6231" class="javax.swing.JTable" binding="tbl_uns_facility">
                                 <constraints/>
                                 <properties/>
                               </component>

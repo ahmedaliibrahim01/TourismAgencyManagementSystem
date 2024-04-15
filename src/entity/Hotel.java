@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class Hotel {
     private int id;
     private String name;
@@ -9,11 +11,12 @@ public class Hotel {
     private String phone;
     private String email;
     private String star;
+    private ArrayList<String> facilities;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star) {
+    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, ArrayList<String> facilities) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -22,6 +25,18 @@ public class Hotel {
         this.phone = phone;
         this.email = email;
         this.star = star;
+        this.facilities = facilities;
+    }
+
+    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, ArrayList<String> facilities) {
+        this.name = name;
+        this.city = city;
+        this.region = region;
+        this.fullAddress = fullAddress;
+        this.phone = phone;
+        this.email = email;
+        this.star = star;
+        this.facilities = facilities;
     }
 
     public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star) {
@@ -98,6 +113,14 @@ public class Hotel {
         this.star = star;
     }
 
+    public ArrayList<String> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(ArrayList<String> facilities) {
+        this.facilities = facilities;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -109,6 +132,7 @@ public class Hotel {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", star='" + star + '\'' +
+                ", facilities=" + facilities +
                 '}';
     }
 }

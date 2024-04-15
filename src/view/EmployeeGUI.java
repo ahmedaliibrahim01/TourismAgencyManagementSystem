@@ -13,7 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class EmployeeGUI extends Layout{
+public class EmployeeGUI extends Layout {
     private JPanel container;
     private JTabbedPane tabbedPane_hotel;
     private JButton btn_employee_logout;
@@ -40,11 +40,12 @@ public class EmployeeGUI extends Layout{
     private DefaultTableModel tmdl_hotels = new DefaultTableModel();
 
     private HotelManager hotelManager;
+
     public EmployeeGUI(User user) {
         this.hotelManager = new HotelManager();
         this.add(container);
         this.guiInitilaze(1500, 1000);
-        container.setPreferredSize(new Dimension(1500,1000));
+        container.setPreferredSize(new Dimension(1500, 1000));
 
         this.user = user;
         if (this.user == null) {
@@ -58,9 +59,9 @@ public class EmployeeGUI extends Layout{
         loadHotelComponent();
 
 
-
         logout();
     }
+
     private void loadHotelsTable() {
         Object[] col_hotel_list = {"ID", "Name", "City", "Region", "Full Address", "Phone", "Email", "Star"};
         ArrayList<Object[]> hotelList = this.hotelManager.getForTable(col_hotel_list.length);
@@ -84,12 +85,13 @@ public class EmployeeGUI extends Layout{
                 @Override
                 public void windowClosed(WindowEvent e) {
                     loadHotelsTable();
+                    reComponent();
                 }
             });
         });
 
         btn_hotel_update.addActionListener(e -> {
-            int selectedHotelId = this.getTableSelectedRow(tbl_hotels,0);
+            int selectedHotelId = this.getTableSelectedRow(tbl_hotels, 0);
             if (selectedHotelId != -1) {
                 HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(this.hotelManager.getById(selectedHotelId));
                 hotelAddUpdateGUI.addWindowListener(new WindowAdapter() {
@@ -110,12 +112,12 @@ public class EmployeeGUI extends Layout{
                 if (Helper.confirm("sure","Delete")) {
                     if (this.hotelManager.delete(selectedHotelId)) {
                         Helper.showMsg("done");
-                        hotelAddUpdateGUI.dispose();
                         loadHotelsTable();
+                        hotelAddUpdateGUI.dispose();
                     } else {
                         Helper.showMsg("error");
                     }
-                }else {
+                } else {
                     hotelAddUpdateGUI.dispose();
                 }
             } else {
@@ -123,10 +125,11 @@ public class EmployeeGUI extends Layout{
             }
         });
 
+
     }
 
 
-    public void logout(){
+    public void logout() {
         btn_employee_logout.addActionListener(e -> {
             dispose();
             LoginGUI loginView = new LoginGUI();
