@@ -329,7 +329,7 @@
                             <properties/>
                             <border type="none"/>
                             <children>
-                              <component id="26d8" class="javax.swing.JTable" binding="table3" default-binding="true">
+                              <component id="26d8" class="javax.swing.JTable" binding="tbl_pension_type">
                                 <constraints/>
                                 <properties/>
                               </component>

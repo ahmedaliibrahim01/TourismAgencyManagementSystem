@@ -16,7 +16,7 @@ public class PensionTypeDao {
 
     public ArrayList<PensionType> findAll() {
         ArrayList<PensionType> pensionTypeList = new ArrayList<>();
-        String sql = "SELECT * FROM public.pension_type ORDER BY hotel_id ASC";
+        String sql = "SELECT * FROM public.pension_type ORDER BY pension_type_id ASC";
         try {
             ResultSet rs = this.connection.createStatement().executeQuery(sql);
             while (rs.next()) {

@@ -99,7 +99,7 @@ public class EmployeeGUI extends Layout{
                     }
                 });
             } else {
-                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 
@@ -119,7 +119,7 @@ public class EmployeeGUI extends Layout{
                     hotelAddUpdateGUI.dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 

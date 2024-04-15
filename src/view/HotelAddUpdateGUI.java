@@ -2,6 +2,7 @@ package view;
 
 import business.FacilityManager;
 import business.HotelManager;
+import business.PensionTypeManager;
 import core.Helper;
 import entity.Hotel;
 
@@ -39,19 +40,22 @@ public class HotelAddUpdateGUI extends Layout {
     private JTabbedPane tabbedPane2;
     private JTable table2;
     private JTabbedPane tabbedPane3;
-    private JTable table3;
+    private JTable tbl_pension_type;
     private JTabbedPane tabbedPane4;
     private JTable table4;
     private JPanel unf_panel;
     private JButton btn_save_hotel;
-    private DefaultTableModel tmdl_users = new DefaultTableModel();
-    private Hotel hotel;
-    private FacilityManager facilityManager;
-    private HotelManager hotelManager;
+    private final DefaultTableModel tmpl_facilities = new DefaultTableModel();
+    private final DefaultTableModel tmpl_pension_type = new DefaultTableModel();
+    private final Hotel hotel;
+    private final FacilityManager facilityManager;
+    private final PensionTypeManager pensionTypeManager;
+    private final HotelManager hotelManager;
 
     public HotelAddUpdateGUI(Hotel hotel) {
         this.hotelManager = new HotelManager();
         this.facilityManager = new FacilityManager();
+        this.pensionTypeManager = new PensionTypeManager();
         this.add(container);
         this.guiInitilaze(500, 720);
         container.setPreferredSize(new Dimension(1000, 720));
@@ -73,6 +77,10 @@ public class HotelAddUpdateGUI extends Layout {
         // Facilities Management
         loadFacilityTable();
         loadFacilityComponent();
+
+        // Facilities Management
+        loadPensionTypeTable();
+        loadPensionTypeComponent();
 
         reComponent();
     }
@@ -121,7 +129,7 @@ public class HotelAddUpdateGUI extends Layout {
     public void loadFacilityTable() {
         Object[] col_facility_list = {"Facility Name"};
         ArrayList<Object[]> facilityList = this.facilityManager.getForTable(col_facility_list.length);
-        this.createTable(this.tmdl_users, this.tbl_facilities, col_facility_list, facilityList);
+        this.createTable(this.tmpl_facilities, this.tbl_facilities, col_facility_list, facilityList);
     }
 
     public void loadFacilityComponent() {
@@ -134,10 +142,31 @@ public class HotelAddUpdateGUI extends Layout {
         });
     }
 
+    public void loadPensionTypeTable() {
+        Object[] col_pension_type_list = {"Pension Type Name"};
+        ArrayList<Object[]> pensionTypeList = this.pensionTypeManager.getForTable(col_pension_type_list.length);
+        this.createTable(this.tmpl_pension_type, this.tbl_pension_type, col_pension_type_list, pensionTypeList);
+    }
+
+    public void loadPensionTypeComponent() {
+        this.tbl_pension_type.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_pension_type.rowAtPoint(e.getPoint());
+                tbl_pension_type.setRowSelectionInterval(selectedRow, selectedRow);
+            }
+        });
+    }
+
     public void reComponent() {
         this.tbl_facilities.getColumnModel().getColumn(0).setMaxWidth(200);
         this.tbl_facilities.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
         this.tbl_facilities.revalidate();
         this.tbl_facilities.repaint();
+
+        this.tbl_pension_type.getColumnModel().getColumn(0).setMaxWidth(200);
+        this.tbl_pension_type.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
+        this.tbl_pension_type.revalidate();
+        this.tbl_pension_type.repaint();
     }
 }

@@ -20,7 +20,6 @@ public class PensionTypeManager {
         for (PensionType obj : this.findAll()) {
             int i = 0;
             Object[] rowObject = new Object[size];
-            rowObject[i++] = obj.getId();
             rowObject[i++] = obj.getName();
             pensionTypeRowList.add(rowObject);
         }
