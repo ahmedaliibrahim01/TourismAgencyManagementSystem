@@ -6,7 +6,7 @@ import entity.Facility;
 import java.util.ArrayList;
 
 public class FacilityManager {
-    private FacilityDao facilityDao;
+    private final FacilityDao facilityDao;
 
     public FacilityManager() {
         this.facilityDao = new FacilityDao();

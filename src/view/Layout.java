@@ -41,7 +41,7 @@ public class Layout extends JFrame {
         if (selectedRow != -1) {
             return (int) table.getModel().getValueAt(selectedRow, col_index);
         }
-        return -1; // veya başka bir varsayılan değer
+        return -1;
     }
 
     public void tableRowSelect(JTable table){
@@ -62,4 +62,9 @@ public class Layout extends JFrame {
         Dimension size = frame.getSize();
         System.out.println("Dimension is: " + size);
     }
+    public void printFrameSize(JTextField frame) {
+        Dimension size = frame.getSize();
+        System.out.println("Dimension is: " + size);
+    }
+
 }

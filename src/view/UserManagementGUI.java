@@ -107,6 +107,8 @@ public class UserManagementGUI extends Layout{
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_users.rowAtPoint(e.getPoint());
                 tbl_users.setRowSelectionInterval(selectedRow, selectedRow);
+                int selectedUserId = (int) tbl_users.getValueAt(selectedRow, 0);
+                txtf_selected_id.setText(String.valueOf(selectedUserId));
             }
         });
 
