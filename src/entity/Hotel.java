@@ -40,15 +40,6 @@ public class Hotel {
         this.facilities = facilities;
     }
 
-    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star) {
-        this.name = name;
-        this.city = city;
-        this.region = region;
-        this.fullAddress = fullAddress;
-        this.phone = phone;
-        this.email = email;
-        this.star = star;
-    }
 
     public int getId() {
         return id;

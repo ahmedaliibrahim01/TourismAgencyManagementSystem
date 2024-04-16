@@ -3,10 +3,7 @@ package dao;
 import core.Db;
 import entity.Hotel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class HotelDao {
@@ -49,7 +46,7 @@ public class HotelDao {
     }
 
     public boolean save(Hotel hotel) {
-        String query = "INSERT INTO public.hotel (hotel_name, hotel_city, hotel_region, hotel_full_address, hotel_phone, hotel_email, hotel_star) VALUES (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO public.hotel (hotel_name, hotel_city, hotel_region, hotel_full_address, hotel_phone, hotel_email, hotel_star, hotel_facilities) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
             pr.setString(1, hotel.getName());
@@ -59,6 +56,8 @@ public class HotelDao {
             pr.setString(5, hotel.getPhone());
             pr.setString(6, hotel.getEmail());
             pr.setString(7, hotel.getStar());
+            Array facilitiesArray = this.connection.createArrayOf("text", hotel.getFacilities());
+            pr.setArray(8, facilitiesArray);
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
             e.printStackTrace();

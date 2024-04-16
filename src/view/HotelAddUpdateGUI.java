@@ -1,6 +1,5 @@
 package view;
 
-import business.FacilityManager;
 import business.HotelManager;
 import business.PensionTypeManager;
 import core.Helper;
@@ -11,9 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+
 public class HotelAddUpdateGUI extends Layout {
     private JPanel container;
     private JTextField txtf_hotel_name;
@@ -47,6 +44,7 @@ public class HotelAddUpdateGUI extends Layout {
     private JTable table4;
     private JPanel unf_panel;
     private JButton btn_save_hotel;
+    private JButton btn_test;
     private final Hotel hotel;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {
@@ -61,13 +59,11 @@ public class HotelAddUpdateGUI extends Layout {
     DefaultTableModel selectedFacilitiesMdl = new DefaultTableModel();
     private String[] selectedFacilities = {};
 
-    private final FacilityManager facilityManager;
     private final PensionTypeManager pensionTypeManager;
     private final HotelManager hotelManager;
 
     public HotelAddUpdateGUI(Hotel hotel) {
         this.hotelManager = new HotelManager();
-        this.facilityManager = new FacilityManager();
         this.pensionTypeManager = new PensionTypeManager();
         this.add(container);
         this.guiInitilaze(500, 720);
@@ -89,9 +85,7 @@ public class HotelAddUpdateGUI extends Layout {
 
         // Facilities Management
         loadFacilityTable();
-//        loadFacilityComponent();
         loadHotelFacilityTable();
-//        loadHotelFacilityComponent();
 
 
         // Pension Type Management
@@ -99,6 +93,16 @@ public class HotelAddUpdateGUI extends Layout {
 //        loadPensionTypeComponent();
 
         //reSizeComponent();
+        btn_test.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Print the selectedFacilities array
+                for (String facility : selectedFacilities) {
+                    System.out.println(facility);
+                }
+            }
+        });
+
     }
 
     private void loadFacilityTable() {
@@ -138,7 +142,8 @@ public class HotelAddUpdateGUI extends Layout {
                             txtf_hotel_full_address.getText(),
                             txtf_hotel_email.getText(),
                             txtf_hotel_phone.getText(),
-                            txtf_hotel_star.getText());
+                            txtf_hotel_star.getText(),
+                            selectedFacilities);
                     result = this.hotelManager.save(obj);
                 } else {
                     this.hotel.setName(txtf_hotel_name.getText());
