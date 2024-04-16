@@ -44,7 +44,6 @@ public class HotelAddUpdateGUI extends Layout {
     private JTable table4;
     private JPanel unf_panel;
     private JButton btn_save_hotel;
-    private JButton btn_test;
     private final Hotel hotel;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {
@@ -93,15 +92,6 @@ public class HotelAddUpdateGUI extends Layout {
 //        loadPensionTypeComponent();
 
         //reSizeComponent();
-        btn_test.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Print the selectedFacilities array
-                for (String facility : selectedFacilities) {
-                    System.out.println(facility);
-                }
-            }
-        });
 
     }
 
@@ -176,14 +166,16 @@ public class HotelAddUpdateGUI extends Layout {
         });
         btn_remove_facility.addActionListener(e -> {
             int selectedRow = tbl_uns_facility.getSelectedRow();
-            if (selectedRow != -1){
-                Object[] rowData = {tbl_facilities.getValueAt(selectedRow,0)};
+            if (selectedRow != -1) {
+                Object[] rowData = {tbl_uns_facility.getValueAt(selectedRow, 0)};
                 unselectedFacilitiesMdl.addRow(rowData);
                 String facilityName = (String) rowData[0];
                 unselectedFacilities = addFacilityToArray(unselectedFacilities, facilityName);
                 selectedFacilitiesMdl.removeRow(selectedRow);
+                selectedFacilities = removeHotelFromArray(selectedFacilities, facilityName);
             }
         });
+
     }
     private String[] addFacilityToArray(String[] selectedFacilities, String facilityName) {
         String[] newFacilities = new String[selectedFacilities.length + 1];
@@ -191,6 +183,22 @@ public class HotelAddUpdateGUI extends Layout {
         newFacilities[newFacilities.length - 1] = facilityName;
         return newFacilities;
     }
+
+    private String[] removeHotelFromArray(String[] selectedFacilities, String facilityName) {
+        String[] newFacilities = new String[selectedFacilities.length - 1];
+        int index = 0;
+        for (String facility : selectedFacilities) {
+            if (!facility.equals(facilityName)) {
+                newFacilities[index++] = facility;
+            }
+        }
+        return newFacilities;
+    }
+
+    // hotels
+    // hotelName
+    //newHotels
+    //hotel
 
 
     public void reSizeComponent() {
