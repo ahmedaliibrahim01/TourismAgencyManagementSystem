@@ -51,7 +51,7 @@ public class EmployeeGUI extends Layout {
         if (this.user == null) {
             dispose();
         }
-        this.lbl_employee_welcome.setText("Welcome Back :  " + Helper.firstWordUpper(this.user.getName()));
+        this.lbl_employee_welcome.setText("Welcome Back :  " + Helper.firstWordUpper(this.user.getNameSurname()));
 
 
         // Hotel Management

@@ -195,12 +195,6 @@ public class HotelAddUpdateGUI extends Layout {
         return newFacilities;
     }
 
-    // hotels
-    // hotelName
-    //newHotels
-    //hotel
-
-
     public void reSizeComponent() {
         this.tbl_facilities.getColumnModel().getColumn(0).setMaxWidth(200);
         this.tbl_facilities.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));

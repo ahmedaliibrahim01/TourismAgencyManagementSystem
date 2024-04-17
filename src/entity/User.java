@@ -2,16 +2,18 @@ package entity;
 
 public class User {
     private int id;
-    private String name;
+    private String nameSurname;
+    private String user;
     private String password;
     private Role role;
 
     public User() {
     }
 
-    public User(int id, String name, String password, Role role) {
+    public User(int id, String nameSurname, String user, String password, Role role) {
         this.id = id;
-        this.name = name;
+        this.nameSurname = nameSurname;
+        this.user = user;
         this.password = password;
         this.role = role;
     }
@@ -21,14 +23,15 @@ public class User {
         EMPLOYEE
     }
 
-    public User(String name, String password, Role role) {
-        this.name = name;
+    public User(String nameSurname, String user, String password, Role role) {
+        this.nameSurname = nameSurname;
+        this.user = user;
         this.password = password;
         this.role = role;
     }
 
-    public User(String name, String password) {
-        this.name = name;
+    public User(String user, String password) {
+        this.user = user;
         this.password = password;
     }
 
@@ -40,12 +43,20 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameSurname() {
+        return nameSurname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameSurname(String nameSurname) {
+        this.nameSurname = nameSurname;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {
@@ -68,9 +79,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", nameSurname='" + nameSurname + '\'' +
+                ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

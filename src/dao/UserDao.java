@@ -30,12 +30,13 @@ public class UserDao {
         return userList;
     }
     public boolean save(User user) {
-        String query = "INSERT INTO public.user (user_name, user_password, user_role) VALUES (?,?,?)";
+        String query = "INSERT INTO public.user (user_name_surname, user_user, user_password, user_role) VALUES (?,?,?,?)";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
-            pr.setString(1, user.getName());
-            pr.setString(2, user.getPassword());
-            pr.setString(3, user.getRole().toString());
+            pr.setString(1,user.getNameSurname());
+            pr.setString(2, user.getUser());
+            pr.setString(3, user.getPassword());
+            pr.setString(4, user.getRole().toString());
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -44,13 +45,14 @@ public class UserDao {
     }
 
     public boolean update(User user) {
-        String query = "UPDATE public.user SET user_name = ?, user_password = ?, user_role = ? WHERE user_id = ?";
+        String query = "UPDATE public.user SET user_name_surname = ?,user_user = ?, user_password = ?, user_role = ? WHERE user_id = ?";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
-            pr.setString(1, user.getName());
-            pr.setString(2, user.getPassword());
-            pr.setString(3, user.getRole().toString());
-            pr.setInt(4, user.getId());
+            pr.setString(1, user.getNameSurname());
+            pr.setString(2, user.getUser());
+            pr.setString(3, user.getPassword());
+            pr.setString(4, user.getRole().toString());
+            pr.setInt(5, user.getId());
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +74,7 @@ public class UserDao {
 
     public User findByLogin(String username, String password) {
         User obj = null;
-        String query = "SELECT * FROM public.user WHERE user_name = ? AND user_password = ?";
+        String query = "SELECT * FROM public.user WHERE user_user = ? AND user_password = ?";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
             pr.setString(1, username);
@@ -102,12 +104,38 @@ public class UserDao {
         }
         return obj;
     }
-    
 
+    public ArrayList<User> findByAdmin(){
+        ArrayList<User> userList = new ArrayList<>();
+        String query = "SELECT * FROM public.user WHERE user_role = 'ADMIN' ORDER BY user_id ASC";
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()) {
+                userList.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+    public ArrayList<User> findByEmployee(){
+        ArrayList<User> userList = new ArrayList<>();
+        String query = "SELECT * FROM public.user WHERE user_role = 'EMPLOYEE' ORDER BY user_id ASC";
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+            while (rs.next()) {
+                userList.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
     public User match(ResultSet rs) throws SQLException {
         User obj = new User();
         obj.setId(rs.getInt("user_id"));
-        obj.setName(rs.getString("user_name"));
+        obj.setNameSurname(rs.getString("user_name_surname"));
+        obj.setUser(rs.getString("user_user"));
         obj.setPassword(rs.getString("user_password"));
         obj.setRole(User.Role.valueOf(rs.getString("user_role")));
         return obj;

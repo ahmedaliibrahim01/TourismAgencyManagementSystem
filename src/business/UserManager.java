@@ -20,6 +20,12 @@ public class UserManager {
     public ArrayList<User> findAll() {
         return this.userDao.findAll();
     }
+    public ArrayList<User>findByAdmin(){
+        return this.userDao.findByAdmin();
+    }
+    public ArrayList<User>findByEmployee(){
+        return this.userDao.findByEmployee();
+    }
     public boolean save(User user) {
         if (user.getId() != 0) {
             Helper.showMsg("error");
@@ -43,14 +49,14 @@ public class UserManager {
         return this.userDao.delete(id);
     }
 
-
     public ArrayList<Object[]> getForTable(int size) {
         ArrayList<Object[]> userRowList = new ArrayList<>();
         for (User obj : this.findAll()) {
             int i = 0;
             Object[] rowObject = new Object[size];
             rowObject[i++] = obj.getId();
-            rowObject[i++] = obj.getName();
+            rowObject[i++] = obj.getNameSurname();
+            rowObject[i++] = obj.getUser();
             rowObject[i++] = obj.getPassword();
             rowObject[i++] = obj.getRole();
             userRowList.add(rowObject);

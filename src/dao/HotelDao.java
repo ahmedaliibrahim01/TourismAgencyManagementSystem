@@ -92,7 +92,19 @@ public class HotelDao {
         }
         return obj;
     }
-
+    public ArrayList<Hotel> filterByAdmin() {
+        ArrayList<Hotel> hotelList = new ArrayList<>();
+        String sql = "SELECT * FROM public.hotel ORDER BY hotel_id ASC";
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(sql);
+            while (rs.next()) {
+                hotelList.add(this.match(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hotelList;
+    }
     public Hotel match(ResultSet rs) throws SQLException {
         Hotel obj = new Hotel();
         obj.setId(rs.getInt("hotel_id"));

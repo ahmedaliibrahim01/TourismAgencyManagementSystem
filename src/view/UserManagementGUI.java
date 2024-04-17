@@ -7,11 +7,9 @@ import entity.User;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserManagementGUI extends Layout{
     private JPanel container;
@@ -26,12 +24,11 @@ public class UserManagementGUI extends Layout{
     private JButton btn_logout;
     private JPanel pnl_admin;
     private JPanel pnl_welcome;
-    private JPanel pnl_filter;
     private JPanel pnl_table_user;
     private JScrollPane scrl_table;
     private JLabel lbl_filter;
     private JTextField txtf_selected_id;
-    private JLabel lbl_ID;
+    private JPanel pnl_selected;
     private JPopupMenu user_menu;
     private Object[] col_model;
     private User user;
@@ -43,21 +40,26 @@ public class UserManagementGUI extends Layout{
         this.add(container);
         this.guiInitilaze(1000, 500);
         container.setPreferredSize(new Dimension(1000,500));
+        pnl_selected.setPreferredSize(new Dimension(100, pnl_selected.getPreferredSize().height));
         this.user = user;
         if (this.user == null) {
             dispose();
         }
-        this.lbl_welcome.setText("Welcome :  " + Helper.firstWordUpper(this.user.getName()));
+        this.lbl_welcome.setText("Welcome :  " + Helper.firstWordUpper(this.user.getNameSurname()));
 
         // User Management
         loadUsersTable();
         loadUserComponent();
-        loadUserComponentButtons();
         this.tbl_users.setComponentPopupMenu(user_menu);
         logout();
     }
+    private void loadUsersTable() {
+        Object[] col_user_list = {"ID", "Name Surname", "User", "Password", "Role"};
+        ArrayList<Object[]> userList = this.userManager.getForTable(col_user_list.length);
+        this.createTable(this.tmdl_users, this.tbl_users, col_user_list, userList);
+    }
 
-    private void loadUserComponentButtons() {
+    private void loadUserComponent() {
         btn_update.addActionListener(e -> {
             int selectedUserId = this.getTableSelectedRow(tbl_users,0);
             if (selectedUserId != -1) {
@@ -69,7 +71,7 @@ public class UserManagementGUI extends Layout{
                     }
                 });
             } else {
-                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a user.", "No User Selected", JOptionPane.WARNING_MESSAGE);
             }
 
         });
@@ -86,7 +88,7 @@ public class UserManagementGUI extends Layout{
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a user.", "No User Selected", JOptionPane.WARNING_MESSAGE);
             }
         });
 
@@ -99,16 +101,16 @@ public class UserManagementGUI extends Layout{
                 }
             });
         });
-    }
 
-    private void loadUserComponent() {
         this.tbl_users.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_users.rowAtPoint(e.getPoint());
                 tbl_users.setRowSelectionInterval(selectedRow, selectedRow);
                 int selectedUserId = (int) tbl_users.getValueAt(selectedRow, 0);
-                txtf_selected_id.setText(String.valueOf(selectedUserId));
+                if (selectedUserId != -1){
+                    txtf_selected_id.setText(String.valueOf(selectedUserId));
+                }
             }
         });
 
@@ -152,14 +154,32 @@ public class UserManagementGUI extends Layout{
             }else {
                 JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a row.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
             }
+        });
 
+        this.cmbx_user_filter.addActionListener(e -> {
+            String selectedRole = (String) cmbx_user_filter.getSelectedItem();
+            if(selectedRole != null ){
+                if (selectedRole.equals("ADMIN")) {
+                    ArrayList<User> userList = this.userManager.findByAdmin();
+                    loadUsersByRole(userList);
+                }else if (selectedRole.equals("EMPLOYEE")){
+                    ArrayList<User> userList = this.userManager.findByEmployee();
+                    loadUsersByRole(userList);
+                }else {
+                    ArrayList<User> userList = this.userManager.findAll();
+                    loadUsersByRole(userList);
+                }
+            }
         });
     }
-
-    private void loadUsersTable() {
-        Object[] col_user_list = {"ID", "Name", "Password", "Role"};
-        ArrayList<Object[]> userList = this.userManager.getForTable(col_user_list.length);
-        this.createTable(this.tmdl_users, this.tbl_users, col_user_list, userList);
+    private void loadUsersByRole(ArrayList<User> userList) {
+        tmdl_users.setRowCount(0);
+        for (User user : userList) {
+            Object[] rowData = {user.getId(), user.getNameSurname(), user.getUser(), user.getPassword(), user.getRole()};
+            tmdl_users.addRow(rowData);
+        }
+        tbl_users.setModel(tmdl_users);
+        txtf_selected_id.setText("No selected ID");
     }
 
     public void logout(){
