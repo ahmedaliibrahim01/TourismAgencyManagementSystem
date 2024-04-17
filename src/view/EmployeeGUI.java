@@ -75,7 +75,6 @@ public class EmployeeGUI extends Layout {
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_hotels.rowAtPoint(e.getPoint());
                 tbl_hotels.setRowSelectionInterval(selectedRow, selectedRow);
-                reComponent();
             }
         });
 

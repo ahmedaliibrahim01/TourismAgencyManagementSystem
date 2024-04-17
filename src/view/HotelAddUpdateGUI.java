@@ -1,5 +1,6 @@
 package view;
 
+import business.FacilityManager;
 import business.HotelManager;
 import business.PensionTypeManager;
 import core.Helper;
@@ -10,6 +11,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class HotelAddUpdateGUI extends Layout {
     private JPanel container;
@@ -45,6 +49,7 @@ public class HotelAddUpdateGUI extends Layout {
     private JPanel unf_panel;
     private JButton btn_save_hotel;
     private final Hotel hotel;
+    private FacilityManager facilityManager;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {
             "Ücretsiz Otopark",
@@ -62,6 +67,7 @@ public class HotelAddUpdateGUI extends Layout {
     private final HotelManager hotelManager;
 
     public HotelAddUpdateGUI(Hotel hotel) {
+        this.facilityManager = new FacilityManager();
         this.hotelManager = new HotelManager();
         this.pensionTypeManager = new PensionTypeManager();
         this.add(container);
@@ -91,16 +97,14 @@ public class HotelAddUpdateGUI extends Layout {
 //        loadPensionTypeTable();
 //        loadPensionTypeComponent();
 
-        //reSizeComponent();
+        reSizeComponent();
 
     }
 
     private void loadFacilityTable() {
-        unselectedFacilitiesMdl.addColumn("Facility Name");
-        for(String facility : unselectedFacilities){
-            unselectedFacilitiesMdl.addRow(new Object[]{facility});
-        }
-        tbl_facilities.setModel(unselectedFacilitiesMdl);
+        Object[] col_facility_list = {"Facility Name"};
+        ArrayList<Object[]> facilityList = this.facilityManager.getForTableFacilities(col_facility_list.length);
+        this.createTable(this.unselectedFacilitiesMdl, this.tbl_facilities, col_facility_list, facilityList);
     }
 
     private void loadHotelFacilityTable() {
@@ -113,6 +117,14 @@ public class HotelAddUpdateGUI extends Layout {
 
 
     private void loadHotelComponent() {
+        this.tbl_facilities.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int selectedRow = tbl_facilities.rowAtPoint(e.getPoint());
+                tbl_facilities.setRowSelectionInterval(selectedRow, selectedRow);
+            }
+        });
+
         this.btn_save_hotel.addActionListener(e -> {
             if (Helper.isFieldEmpty(this.txtf_hotel_name)
                     || Helper.isFieldEmpty(this.txtf_hotel_city)
