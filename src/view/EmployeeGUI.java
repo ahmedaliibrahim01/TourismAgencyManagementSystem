@@ -149,6 +149,5 @@ public class EmployeeGUI extends Layout {
         this.tbl_hotels.setPreferredSize(new Dimension(tbl_hotels.getWidth(), 435));
         this.tbl_hotels.revalidate();
         this.tbl_hotels.repaint();
-
     }
 }

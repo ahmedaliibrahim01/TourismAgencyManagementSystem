@@ -188,6 +188,4 @@ public class UserManagementGUI extends Layout{
             LoginGUI loginView = new LoginGUI();
         });
     }
-
-
 }
