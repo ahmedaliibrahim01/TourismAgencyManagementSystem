@@ -52,6 +52,13 @@ public class HotelAddUpdateGUI extends Layout {
     private FacilityManager facilityManager;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {
+            "Ücretsiz Otopark",
+            "Ücretsiz WiFi",
+            "Yüzme Havuzu",
+            "Fitness Center",
+            "Hotel Concierge",
+            "SPA",
+            "7/24 Oda Servisi"
     };
     DefaultTableModel selectedFacilitiesMdl = new DefaultTableModel();
     private String[] selectedFacilities = {};
@@ -105,12 +112,6 @@ public class HotelAddUpdateGUI extends Layout {
         }
         tbl_uns_facility.setModel(selectedFacilitiesMdl);
     }
-//
-//    private void loadPensionTypeTable() {
-//        Object[] col_pension_type_list = {"Pension Type Name"};
-//        ArrayList<Object[]> pensionTypeList = this.pensionTypeManager.getForTableFacilities(col_facility_list.length);
-//        this.createTable(this.unselectedFacilitiesMdl, this.tbl_facilities, col_facility_list, facilityList);
-//    }
 
     private void loadHotelPensionTypeTable() {
         selectedFacilitiesMdl.addColumn("Pension Type Name");
