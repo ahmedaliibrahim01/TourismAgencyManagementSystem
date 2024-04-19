@@ -1,16 +1,16 @@
 package business;
 
 import core.Helper;
-import dao.UserDao;
+import dao.UserDAO;
 import entity.User;
 
 import java.util.ArrayList;
 
 public class UserManager {
-    private UserDao userDao;
+    private UserDAO userDao;
 
     public UserManager() {
-        this.userDao = new UserDao();
+        this.userDao = new UserDAO();
     }
 
     public User findByLogin(String username, String password) {

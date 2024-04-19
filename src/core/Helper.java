@@ -59,6 +59,25 @@ public class Helper {
     public static boolean isFieldEmpty(JTextField field) {
         return field.getText().trim().isEmpty();
     }
+    public static boolean isTableEmpty(JTable table) {
+        // Tablonun satır ve sütun sayısını al
+        int rowCount = table.getRowCount();
+        int columnCount = table.getColumnCount();
+
+        // Tablo satır ve sütunlarını döngüye alarak kontrol et
+        for (int row = 0; row < rowCount; row++) {
+            for (int col = 0; col < columnCount; col++) {
+                // Her hücrenin değerini kontrol et
+                Object value = table.getValueAt(row, col);
+                if (value != null && !value.toString().isEmpty()) {
+                    // Eğer herhangi bir hücre doluysa, tablo dolu kabul edilir
+                    return false;
+                }
+            }
+        }
+        // Eğer hiçbir hücre dolu değilse, tablo boş kabul edilir
+        return true;
+    }
 
     public static boolean isFieldListEmpty(JTextField[] fieldList) {
         for (JTextField field : fieldList) {

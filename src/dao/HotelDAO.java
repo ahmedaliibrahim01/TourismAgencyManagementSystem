@@ -6,9 +6,9 @@ import entity.Hotel;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class HotelDao {
+public class HotelDAO {
     private Connection connection;
-    public HotelDao() {
+    public HotelDAO() {
         this.connection = Db.getInstance();
     }
 
@@ -27,7 +27,7 @@ public class HotelDao {
     }
 
     public boolean update(Hotel hotel) {
-        String query = "UPDATE public.hotel SET hotel_name = ?, hotel_city = ?, hotel_region = ?, hotel_full_address = ?, hotel_phone = ?, hotel_email = ?, hotel_star = ? WHERE hotel_id = ?";
+        String query = "UPDATE public.hotel SET hotel_name = ?, hotel_city = ?, hotel_region = ?, hotel_full_address = ?, hotel_phone = ?, hotel_email = ?, hotel_star = ?, hotel_facilities = ? WHERE hotel_id = ?";
         try {
             PreparedStatement pr = this.connection.prepareStatement(query);
             pr.setString(1, hotel.getName());
@@ -37,7 +37,9 @@ public class HotelDao {
             pr.setString(5, hotel.getPhone());
             pr.setString(6, hotel.getEmail());
             pr.setString(7, hotel.getStar());
-            pr.setInt(8,hotel.getId());
+            Array facilitiesArray = this.connection.createArrayOf("text", hotel.getFacilities());
+            pr.setArray(8, facilitiesArray);
+            pr.setInt(9,hotel.getId());
             return pr.executeUpdate() != -1;
         } catch (SQLException e) {
             e.printStackTrace();

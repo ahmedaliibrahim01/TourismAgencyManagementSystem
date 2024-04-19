@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserDao {
+public class UserDAO {
     private final Connection connection;
 
-    public UserDao() {
+    public UserDAO() {
         this.connection = Db.getInstance();
     }
 

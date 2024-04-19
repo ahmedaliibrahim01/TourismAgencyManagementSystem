@@ -1,25 +1,25 @@
 package business;
 
 import core.Helper;
-import dao.HotelDao;
+import dao.HotelDAO;
 import entity.Hotel;
 
 import java.util.ArrayList;
 
 public class HotelManager {
-    private HotelDao hotelDao;
+    private HotelDAO hotelDao;
 
     public HotelManager() {
-        this.hotelDao = new HotelDao();
+        this.hotelDao = new HotelDAO();
     }
     public ArrayList<Hotel> findAll() {
         return this.hotelDao.findAll();
     }
 
     public boolean update(Hotel hotel) {
-        if (this.getById(hotel.getId()) == null) {
-            Helper.showMsg("notFound");
-        }
+//        if (this.getById(hotel.getId()) == null) {
+//            Helper.showMsg("notFound");
+//        }
         return this.hotelDao.update(hotel);
     }
 

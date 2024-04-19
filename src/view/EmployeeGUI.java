@@ -7,10 +7,7 @@ import entity.User;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class EmployeeGUI extends Layout {
@@ -36,6 +33,7 @@ public class EmployeeGUI extends Layout {
     private JLabel lbl_hotel_delete;
     private JButton btn_hotel_add;
     private JLabel lbl_hotel_add;
+    private JButton btn_add_update;
     private User user;
     private DefaultTableModel tmdl_hotels = new DefaultTableModel();
 
@@ -60,6 +58,7 @@ public class EmployeeGUI extends Layout {
 
 
         logout();
+
     }
 
     private void loadHotelsTable() {
@@ -78,8 +77,24 @@ public class EmployeeGUI extends Layout {
             }
         });
 
+
+        btn_add_update.addActionListener(e -> {
+            int selectedUserId = this.getTableSelectedRow(tbl_hotels,0);
+            if (selectedUserId != -1){
+                FeaturesGUI featuresGUI = new FeaturesGUI(this.hotelManager.getById(selectedUserId));
+                featuresGUI.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        loadHotelsTable();
+                    }
+                });
+            }else {
+                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+
         btn_hotel_add.addActionListener(e -> {
-            HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(null);
+            HotelAddGUI hotelAddUpdateGUI = new HotelAddGUI();
             hotelAddUpdateGUI.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
@@ -92,8 +107,8 @@ public class EmployeeGUI extends Layout {
         btn_hotel_update.addActionListener(e -> {
             int selectedHotelId = this.getTableSelectedRow(tbl_hotels, 0);
             if (selectedHotelId != -1) {
-                HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(this.hotelManager.getById(selectedHotelId));
-                hotelAddUpdateGUI.addWindowListener(new WindowAdapter() {
+                HotelUpdateGUI hotelUpdateGUI = new HotelUpdateGUI(this.hotelManager.getById(selectedHotelId));
+                hotelUpdateGUI.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         loadHotelsTable();
@@ -107,17 +122,17 @@ public class EmployeeGUI extends Layout {
         btn_hotel_delete.addActionListener(e -> {
             int selectedHotelId = this.getTableSelectedRow(tbl_hotels,0);
             if (selectedHotelId != -1) {
-                HotelAddUpdateGUI hotelAddUpdateGUI = new HotelAddUpdateGUI(this.hotelManager.getById(selectedHotelId));
+                //HotelUpdateGUI hotelUpdateGUI = new HotelUpdateGUI(this.hotelManager.getById(selectedHotelId));
                 if (Helper.confirm("sure","Delete")) {
                     if (this.hotelManager.delete(selectedHotelId)) {
                         Helper.showMsg("done");
                         loadHotelsTable();
-                        hotelAddUpdateGUI.dispose();
+                        //hotelUpdateGUI.dispose();
                     } else {
                         Helper.showMsg("error");
                     }
                 } else {
-                    hotelAddUpdateGUI.dispose();
+                    //hotelUpdateGUI.dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
