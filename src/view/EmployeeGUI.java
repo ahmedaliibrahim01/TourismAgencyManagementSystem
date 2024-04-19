@@ -56,7 +56,6 @@ public class EmployeeGUI extends Layout {
         loadHotelsTable();
         loadHotelComponent();
 
-
         logout();
 
     }

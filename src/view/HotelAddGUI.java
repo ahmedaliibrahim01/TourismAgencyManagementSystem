@@ -50,15 +50,7 @@ public class HotelAddGUI extends Layout {
     private final Hotel hotel;
     private FacilityManager facilityManager;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
-    private String[] unselectedFacilities = {
-            "Ücretsiz Otopark",
-            "Ücretsiz WiFi",
-            "Yüzme Havuzu",
-            "Fitness Center",
-            "Hotel Concierge",
-            "SPA",
-            "7/24 Oda Servisi"
-    };
+    private String[] unselectedFacilities = {};
     DefaultTableModel selectedFacilitiesMdl = new DefaultTableModel();
     private String[] selectedFacilities = {};
 
@@ -79,46 +71,27 @@ public class HotelAddGUI extends Layout {
         loadHotelComponent();
 
         // Facilities Management
-        loadFacilityTable();
-        loadHotelFacilityTable();
+        loadLeftFacilityTable();
+        loadRightFacilityTable();
 
-
-        // Pension Type Management
-//        loadPensionTypeTable();
-//        loadPensionTypeTable();
 
         reSizeComponent();
 
     }
 
-    private void loadFacilityTable() {
+    private void loadLeftFacilityTable() {
         Object[] col_facility_list = {"Facility Name"};
         ArrayList<Object[]> facilityList = this.facilityManager.getForTableFacilities(col_facility_list.length);
         this.createTable(this.unselectedFacilitiesMdl, this.tbl_facilities, col_facility_list, facilityList);
     }
 
-    private void loadHotelFacilityTable1() {
-        Object[] col_facility_list = {"Facility Name"};
-        ArrayList<Object[]> facilityList = this.facilityManager.getForTableFacilities(col_facility_list.length);
-        this.createTable(this.selectedFacilitiesMdl, this.tbl_uns_facility, col_facility_list, facilityList);
-    }
-
-    private void loadHotelFacilityTable() {
+    private void loadRightFacilityTable() {
         selectedFacilitiesMdl.addColumn("Facility Name");
         for(String facility : selectedFacilities){
             selectedFacilitiesMdl.addRow(new Object[]{facility});
         }
         tbl_uns_facility.setModel(selectedFacilitiesMdl);
     }
-
-    private void loadHotelPensionTypeTable() {
-        selectedFacilitiesMdl.addColumn("Pension Type Name");
-        for(String facility : selectedFacilities){
-            selectedFacilitiesMdl.addRow(new Object[]{facility});
-        }
-        tbl_uns_facility.setModel(selectedFacilitiesMdl);
-    }
-
 
     private void loadHotelComponent() {
         this.tbl_facilities.addMouseListener(new MouseAdapter() {
@@ -157,6 +130,9 @@ public class HotelAddGUI extends Layout {
                 } else {
                     Helper.showMsg("error");
                 }
+            }
+            for (String unselectedFacilities : unselectedFacilities){
+                System.out.println(unselectedFacilities);
             }
         });
 

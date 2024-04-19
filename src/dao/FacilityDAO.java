@@ -48,6 +48,28 @@ public class FacilityDAO {
     }
 
 
+    // Todo
+    public ArrayList<String> getHotelUnselectedFacilities(int hotelId) {
+        ArrayList<String> facilitiesList = new ArrayList<>();
+        try {
+            String query = "SELECT hotel_facilities FROM hotel WHERE hotel_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, hotelId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Array facilitiesArray = resultSet.getArray("hotel_facilities");
+
+                String[] facilities = (String[]) facilitiesArray.getArray();
+                facilitiesList.addAll(Arrays.asList(facilities));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return facilitiesList;
+    }
+
+
     public Facility match(ResultSet rs) throws SQLException {
         Facility obj = new Facility();
         obj.setName(rs.getString("facility_name"));

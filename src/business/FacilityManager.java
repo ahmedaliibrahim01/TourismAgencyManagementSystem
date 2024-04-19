@@ -19,6 +19,11 @@ public class FacilityManager {
     public ArrayList<String> getHotelFacilities(int hotelId){
         return this.facilityDao.getHotelFacilities(hotelId);
     }
+
+    // Todo
+    public ArrayList<String> getHotelUnselectedFacilities(int hotelId){
+        return this.facilityDao.getHotelFacilities(hotelId);
+    }
     public ArrayList<Object[]> getForTableHotelFacility(int size, int hotelId) {
         ArrayList<Object[]> facilityRowList = new ArrayList<>();
         for (String facility : this.getHotelFacilities(hotelId)) {

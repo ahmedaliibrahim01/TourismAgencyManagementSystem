@@ -12,11 +12,12 @@ public class Hotel {
     private String email;
     private String star;
     private String[] facilities;
+    private String[] unFacilities;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
+    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities, String[] unFacilities) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -26,6 +27,7 @@ public class Hotel {
         this.email = email;
         this.star = star;
         this.facilities = facilities;
+        this.unFacilities = unFacilities;
     }
 
     public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
@@ -112,6 +114,14 @@ public class Hotel {
         this.facilities = facilities;
     }
 
+    public String[] getUnFacilities() {
+        return unFacilities;
+    }
+
+    public void setUnFacilities(String[] unFacilities) {
+        this.unFacilities = unFacilities;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
@@ -124,6 +134,7 @@ public class Hotel {
                 ", email='" + email + '\'' +
                 ", star='" + star + '\'' +
                 ", facilities=" + Arrays.toString(facilities) +
+                ", unFacilities=" + Arrays.toString(unFacilities) +
                 '}';
     }
 }

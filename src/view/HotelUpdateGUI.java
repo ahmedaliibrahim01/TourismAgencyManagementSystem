@@ -50,13 +50,6 @@ public class HotelUpdateGUI extends Layout{
     private FacilityManager facilityManager;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {
-            "Ücretsiz Otopark",
-            "Ücretsiz WiFi",
-            "Yüzme Havuzu",
-            "Fitness Center",
-            "Hotel Concierge",
-            "SPA",
-            "7/24 Oda Servisi"
     };
     DefaultTableModel selectedFacilitiesMdl = new DefaultTableModel();
     private String[] selectedFacilities = {};
@@ -81,7 +74,7 @@ public class HotelUpdateGUI extends Layout{
             this.txtf_hotel_email.setText(hotel.getEmail());
             this.txtf_hotel_phone.setText(hotel.getPhone());
             this.txtf_hotel_star.setText(hotel.getStar());
-            String[] facilities = hotel.getFacilities(); // Varsayılan olarak bir string dizisi döner
+            String[] facilities = hotel.getFacilities();
             if (facilities != null && facilities.length > 0) {
                 StringBuilder tooltipText = new StringBuilder();
                 for (String facility : facilities) {
@@ -95,35 +88,24 @@ public class HotelUpdateGUI extends Layout{
         loadHotelComponent();
 
         // Facilities Management
-        loadFacilityTable();
-        loadHotelFacilityTable();
+        loadLeftTable();
+        loadRightTable();
 
 
         reSizeComponent();
 
     }
 
-    private void loadFacilityTable() {
+    private void loadLeftTable() {
         Object[] col_facility_list = {"Facility Name"};
         ArrayList<Object[]> facilityList = this.facilityManager.getForTableFacilities(col_facility_list.length);
         this.createTable(this.unselectedFacilitiesMdl, this.tbl_facilities, col_facility_list, facilityList);
     }
-
-    private void loadHotelFacilityTable() {
-        Object[] col_facility_list = {"Olanak Adı"};
-        // Seçilen otelin olanaklarını alın
+    private void loadRightTable() {
+        Object[] col_facility_list = {"Facility Name"};
         int hotelId = hotel.getId(); // Otel ID'sini al
         ArrayList<Object[]> facilityList = this.facilityManager.getForTableHotelFacility(col_facility_list.length, hotelId);
-        // Tabloyu doldurun
         this.createTable(this.selectedFacilitiesMdl, this.tbl_uns_facility, col_facility_list, facilityList);
-    }
-
-    private void loadHotelPensionTypeTable() {
-        selectedFacilitiesMdl.addColumn("Pension Type Name");
-        for(String facility : selectedFacilities){
-            selectedFacilitiesMdl.addRow(new Object[]{facility});
-        }
-        tbl_uns_facility.setModel(selectedFacilitiesMdl);
     }
 
 
@@ -132,7 +114,7 @@ public class HotelUpdateGUI extends Layout{
             @Override
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_facilities.rowAtPoint(e.getPoint());
-                tbl_facilities.setRowSelectionInterval(selectedRow, selectedRow); // Bu satır hataya neden oluyor
+                tbl_facilities.setRowSelectionInterval(selectedRow, selectedRow);
             }
         });
 
@@ -140,7 +122,7 @@ public class HotelUpdateGUI extends Layout{
             @Override
             public void mousePressed(MouseEvent e) {
                 int selectedRow = tbl_uns_facility.rowAtPoint(e.getPoint());
-                tbl_uns_facility.setRowSelectionInterval(selectedRow, selectedRow); // Bu satır hataya neden oluyor
+                tbl_uns_facility.setRowSelectionInterval(selectedRow, selectedRow);
             }
         });
 
@@ -178,12 +160,16 @@ public class HotelUpdateGUI extends Layout{
 
         btn_add_facility.addActionListener(e -> {
             int selectedRow = tbl_facilities.getSelectedRow();
-            if (selectedRow != -1){
-                Object[] rowData = {tbl_facilities.getValueAt(selectedRow,0)};
-                selectedFacilitiesMdl.addRow(rowData);
+            if (selectedRow != -1) {
+                Object[] rowData = {tbl_facilities.getValueAt(selectedRow, 0)};
                 String facilityName = (String) rowData[0];
-                selectedFacilities = addFacilityToArray(selectedFacilities, facilityName);
-                unselectedFacilitiesMdl.removeRow(selectedRow);
+                if (isFacilityAlreadySelected(facilityName)) {
+                    JOptionPane.showMessageDialog(container, "Bu özellik zaten seçili.", "Uyarı", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    selectedFacilitiesMdl.addRow(rowData);
+                    selectedFacilities = addFacilityToArray(selectedFacilities, facilityName);
+                    unselectedFacilitiesMdl.removeRow(selectedRow);
+                }
             }
         });
         btn_remove_facility.addActionListener(e -> {
@@ -223,29 +209,13 @@ public class HotelUpdateGUI extends Layout{
         this.tbl_facilities.revalidate();
         this.tbl_facilities.repaint();
 
-        //this.tbl_uns_facility.getColumnModel().getColumn(0).setMaxWidth(200);
         this.tbl_uns_facility.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
         this.tbl_uns_facility.revalidate();
         this.tbl_uns_facility.repaint();
 
-        //this.tbl_pension_type.getColumnModel().getColumn(0).setMaxWidth(200);
         this.tbl_pension_type.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
         this.tbl_pension_type.revalidate();
         this.tbl_pension_type.repaint();
-    }
-
-    private void loadHotelFacilityTable2() {
-        selectedFacilitiesMdl.addColumn("Facility Name");
-        for(String facility : selectedFacilities){
-            selectedFacilitiesMdl.addRow(new Object[]{facility});
-        }
-        tbl_uns_facility.setModel(selectedFacilitiesMdl);
-    }
-
-    private void loadHotelFacilityTable1() {
-        Object[] col_facility_list = {"Facility Name"};
-        ArrayList<Object[]> facilityList = this.facilityManager.getForTableHotelFacility(col_facility_list.length, hotel.getId());
-        this.createTable(this.selectedFacilitiesMdl, this.tbl_uns_facility, col_facility_list, facilityList);
     }
 
     private String[] getSelectedFacilities() {
@@ -257,4 +227,12 @@ public class HotelUpdateGUI extends Layout{
         return selectedFacilitiesList.toArray(new String[0]);
     }
 
+    private boolean isFacilityAlreadySelected(String facilityName) {
+        for (int i = 0; i < selectedFacilitiesMdl.getRowCount(); i++) {
+            if (facilityName.equals(selectedFacilitiesMdl.getValueAt(i, 0))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

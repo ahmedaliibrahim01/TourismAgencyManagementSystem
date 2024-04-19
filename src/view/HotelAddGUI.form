@@ -452,7 +452,7 @@
         </constraints>
         <properties>
           <font size="20" style="1"/>
-          <text value="Add / Update"/>
+          <text value="Add New Hotel"/>
         </properties>
       </component>
     </children>
