@@ -67,4 +67,9 @@ public class Layout extends JFrame {
         System.out.println("Dimension is: " + size);
     }
 
+    public void printFrameSize(JTabbedPane frame) {
+        Dimension size = frame.getSize();
+        System.out.println("Dimension is: " + size);
+    }
+
 }

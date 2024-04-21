@@ -14,29 +14,33 @@ public class PensionTypeManager {
     public PensionTypeManager() {
         this.pensionTypeDao = new PensionTypeDAO();
     }
-    public ArrayList<PensionType> findAll(Hotel hotel) {
-        return this.pensionTypeDao.findAll(hotel);
+    public ArrayList<PensionType> findAll() {
+        return this.pensionTypeDao.findAll();
     }
 
-    public ArrayList<PensionType> getPensionInfo(Hotel hotel){
-        return this.pensionTypeDao.getPensionInfo(hotel);
+    public ArrayList<String> getHotelPension(int hotelId){
+        return this.pensionTypeDao.getHotelPensions(hotelId);
     }
 
-    public ArrayList<Object[]> getForTablePension(int size, Hotel hotel) {
-        ArrayList<Object[]> facilityRowList = new ArrayList<>();
-        for (PensionType obj : this.findAll(hotel)) {
+    public ArrayList<Object[]> getForTableHotelPensions(int size, int hotelId){
+        ArrayList<Object[]> pensionRowList = new ArrayList<>();
+        for (String pensionType : this.getHotelPension(hotelId)){
+            Object[] rowObject = new Object[size];
+            rowObject[0] = pensionType;
+            pensionRowList.add(rowObject);
+        }
+        return pensionRowList;
+    }
+
+    public ArrayList<Object[]> getForTablePensions(int size){
+        ArrayList<Object[]> pensionTypeRowList = new ArrayList<>();
+        for (PensionType obj : this.findAll()){
             int i = 0;
             Object[] rowObject = new Object[size];
             rowObject[i++] = obj.getName();
-            facilityRowList.add(rowObject);
+            pensionTypeRowList.add(rowObject);
         }
-        return facilityRowList;
+        return pensionTypeRowList;
     }
-    public boolean savePension(Hotel hotel, String val) {
-        if (hotel.getId() != 0) {
-            // Otel ID'si 0 olmayan bir pansiyon kaydı oluşturulduğunda başarılı mesajı gösterilir.
-            Helper.showMsg("done");
-        }
-        return this.pensionTypeDao.savePension(hotel, val);
-    }
+
 }

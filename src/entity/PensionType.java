@@ -4,15 +4,11 @@ public class PensionType {
     private int id;
     private String name;
 
-    public PensionType(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public PensionType() {
     }
 
-    public PensionType(String name) {
+    public PensionType(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 

@@ -12,12 +12,12 @@ public class Hotel {
     private String email;
     private String star;
     private String[] facilities;
-    private String[] unFacilities;
+    private String[] pensionTypes;
 
     public Hotel() {
     }
 
-    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities, String[] unFacilities) {
+    public Hotel(int id, String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities, String[] pensionTypes) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -27,10 +27,10 @@ public class Hotel {
         this.email = email;
         this.star = star;
         this.facilities = facilities;
-        this.unFacilities = unFacilities;
+        this.pensionTypes = pensionTypes;
     }
 
-    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
+    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities, String[] pensionTypes) {
         this.name = name;
         this.city = city;
         this.region = region;
@@ -39,6 +39,7 @@ public class Hotel {
         this.email = email;
         this.star = star;
         this.facilities = facilities;
+        this.pensionTypes = pensionTypes;
     }
 
 
@@ -114,12 +115,12 @@ public class Hotel {
         this.facilities = facilities;
     }
 
-    public String[] getUnFacilities() {
-        return unFacilities;
+    public String[] getPensionTypes() {
+        return pensionTypes;
     }
 
-    public void setUnFacilities(String[] unFacilities) {
-        this.unFacilities = unFacilities;
+    public void setPensionTypes(String[] pensionTypes) {
+        this.pensionTypes = pensionTypes;
     }
 
     @Override
@@ -134,7 +135,7 @@ public class Hotel {
                 ", email='" + email + '\'' +
                 ", star='" + star + '\'' +
                 ", facilities=" + Arrays.toString(facilities) +
-                ", unFacilities=" + Arrays.toString(unFacilities) +
+                ", pensionTypes=" + Arrays.toString(pensionTypes) +
                 '}';
     }
 }

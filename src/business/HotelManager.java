@@ -17,9 +17,6 @@ public class HotelManager {
     }
 
     public boolean update(Hotel hotel) {
-//        if (this.getById(hotel.getId()) == null) {
-//            Helper.showMsg("notFound");
-//        }
         return this.hotelDao.update(hotel);
     }
 

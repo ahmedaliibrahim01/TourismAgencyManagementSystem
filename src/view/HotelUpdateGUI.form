@@ -390,7 +390,7 @@
                             <properties/>
                             <border type="none"/>
                             <children>
-                              <component id="cba78" class="javax.swing.JTable" binding="table4" default-binding="true">
+                              <component id="cba78" class="javax.swing.JTable" binding="tbl_uns_pension_type">
                                 <constraints/>
                                 <properties/>
                               </component>
