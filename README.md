@@ -113,15 +113,3 @@ The project uses Swing for the graphical user interface, providing a user-friend
 ## Screenshots
 
 Include screenshots here to visually showcase the application's interface and features.
-
-![Welcome](/static/welcome.png)
-![All Rooms](/static/all_rooms.png)
-![All Reservations](/static/all_reservations.png)
-![Reservation Details](/static/reservation_details.png)
-![All Hotels](/static/all_hotels.png)
-![Hotel Details](/static/hotel_details.png)
-![Hotel Assets](/static/hotel_assets.png)
-![Hotel Rooms](/static/hotel_rooms.png)
-![Hotel Seasons](/static/hotel_seasons.png)
-![Hotel Pensions](/static/hotel_pensions.png)
-![Hotel Reservations](/static/hotel_reservations.png)
