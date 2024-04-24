@@ -38,7 +38,7 @@ public class ADDRoomGUI extends Layout {
     // Constructor for ADDRoomGUI
     public ADDRoomGUI() {
         this.add(container);
-        this.guiInitialize(725, 550);
+        this.guiInitialize(600, 550);
         this.hotel = new Hotel();
         this.room = new Room();
         this.season = new Season();

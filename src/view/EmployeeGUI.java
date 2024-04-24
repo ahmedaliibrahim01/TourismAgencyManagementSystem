@@ -99,6 +99,10 @@ public class EmployeeGUI extends Layout {
         // Reservation Management
         loadReservationTable();
         loadReservationComponents();
+        btn_employee_logout.addActionListener(e -> {
+            LoginGUI loginGUI = new LoginGUI();
+            dispose();
+        });
     }
 
     // Hotel Table
@@ -209,21 +213,6 @@ public class EmployeeGUI extends Layout {
                 loadSeasonTable();
             }
         });
-
-        btn_add_season.addActionListener(e -> {
-            int selectedHotelId = this.getTableSelectedRow(tbl_hotels, 0);
-            if (selectedHotelId != -1) {
-                SeasonGUI seasonGUI = new SeasonGUI(this.hotelManager.getById(selectedHotelId));
-                seasonGUI.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        loadHotelsTable();
-                    }
-                });
-            } else {
-                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
-            }
-        });
         btn_add_pension_type.addActionListener(e -> {
             int selectedHotelId = this.getTableSelectedRow(tbl_hotels, 0);
             if (selectedHotelId != -1) {
@@ -233,6 +222,7 @@ public class EmployeeGUI extends Layout {
                     public void windowClosed(WindowEvent e) {
                         loadHotelsTable();
                         reSizeComponent();
+                        dispose();
                     }
                 });
             } else {
@@ -388,21 +378,6 @@ public class EmployeeGUI extends Layout {
                     @Override
                     public void windowClosed(WindowEvent e) {
                         loadHotelsTable();
-                    }
-                });
-            } else {
-                JOptionPane.showMessageDialog(EmployeeGUI.this, "Please select a hotel.", "No Hotel Selected", JOptionPane.WARNING_MESSAGE);
-            }
-        });
-        btn_add_pension_type.addActionListener(e -> {
-            int selectedHotelId = this.getTableSelectedRow(tbl_hotels, 0);
-            if (selectedHotelId != -1) {
-                PensionGUI pensionGUI = new PensionGUI(this.hotelManager.getById(selectedHotelId));
-                pensionGUI.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        loadHotelsTable();
-                        reSizeComponent();
                     }
                 });
             } else {

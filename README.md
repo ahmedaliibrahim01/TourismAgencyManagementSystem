@@ -1,6 +1,5 @@
-![Travel Agency](/static/logo.jpg)
 
-# Travel Agency
+# Tourism Agency System
 
 ## Description
 
@@ -69,7 +68,7 @@ The project consists of 3 main parts: **Hotel Management**, **User Management** 
 ### Clone
 
 1. Clone the repository: `git clone https://github.com/ahmedaliibrahim01/Tourism_Agency_System.git`
-2. Navigate to the project directory: `cd TravelAgency`
+2. Navigate to the project directory: `cd Tourism_Agency_System`
 3. Open the project in your IDE
 4. Create a database named `tourismagencysystem` in PostgreSQL or change the database name in the `src/main/java/agency/core/Db.java` file
 5. Import the `tourismagencysystem.sql`
