@@ -6,6 +6,10 @@ import entity.User;
 
 import javax.swing.*;
 
+/**
+ * LoginGUI provides an interface for user login.
+ * This class presents an interface using Swing components for user authentication.
+ */
 public class LoginGUI extends Layout {
 
     private JPanel container;
@@ -21,33 +25,42 @@ public class LoginGUI extends Layout {
     private JLabel lbl_user;
     private final UserManager userManager;
 
-
-    public LoginGUI(){
+    /**
+     * Constructor for LoginGUI class.
+     * Initializes necessary objects and creates the login interface.
+     */
+    public LoginGUI() {
         this.userManager = new UserManager();
         add(container);
-        this.guiInitilaze(400, 400);
+        this.guiInitialize(400, 400);
 
+        // Action listener for login button
         btn_login.addActionListener(e -> {
-            if (Helper.isFieldEmpty(textField_username)){
+            // Check if username field is empty
+            if (Helper.isFieldEmpty(textField_username)) {
                 Helper.showMsg("Enter Username");
-            }else if (Helper.isFieldEmpty(passwordField)){
+            }
+            // Check if password field is empty
+            else if (Helper.isFieldEmpty(passwordField)) {
                 Helper.showMsg("Enter Password");
             } else {
-                User loginUser = this.userManager.findByLogin(this.textField_username.getText(),this.passwordField.getText());
-                if (loginUser == null){
+                // Find user by login credentials
+                User loginUser = this.userManager.findByLogin(this.textField_username.getText(), this.passwordField.getText());
+                if (loginUser == null) {
                     Helper.showMsg("User not found");
-                }else {
-                    if (loginUser.getRole().toString().equals("Admin") || loginUser.getRole().toString().equals("ADMIN") || loginUser.getRole().toString().equals("admin")) {
-                        UserManagementGUI adminView = new UserManagementGUI(loginUser);
-                        adminView.setVisible(true);
+                } else {
+                    // Check user role and open respective GUI
+                    if (loginUser.getRole().toString().equalsIgnoreCase("Admin")) {
+                        UserManagementGUI userManagementGUI = new UserManagementGUI(loginUser);
+                        userManagementGUI.setVisible(true);
                         dispose();
                     } else {
-                        EmployeeGUI adminView = new EmployeeGUI(loginUser);
-                        adminView.setVisible(true);
+                        EmployeeGUI employeeGUI = new EmployeeGUI(loginUser);
+                        employeeGUI.setVisible(true);
                         dispose();
                     }
                 }
             }
         });
     }
-    }
+}

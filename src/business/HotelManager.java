@@ -6,20 +6,30 @@ import entity.Hotel;
 
 import java.util.ArrayList;
 
+// Manages operations related to hotels
 public class HotelManager {
     private HotelDAO hotelDao;
 
     public HotelManager() {
         this.hotelDao = new HotelDAO();
     }
+
+    // Retrieves all hotels
     public ArrayList<Hotel> findAll() {
         return this.hotelDao.findAll();
     }
 
+    // Retrieves a hotel by a specific ID
+    public Hotel findHotelById(int hotelId){
+        return hotelDao.getById(hotelId);
+    }
+
+    // Updates a hotel
     public boolean update(Hotel hotel) {
         return this.hotelDao.update(hotel);
     }
 
+    // Adds a hotel record to the database
     public boolean save(Hotel hotel) {
         if (hotel.getId() != 0) {
             Helper.showMsg("error");
@@ -27,6 +37,7 @@ public class HotelManager {
         return this.hotelDao.save(hotel);
     }
 
+    // Deletes a hotel by a specific ID
     public boolean delete(int id) {
         if (this.getById(id) == null) {
             Helper.showMsg("Hotel Not found");
@@ -35,6 +46,7 @@ public class HotelManager {
         return this.hotelDao.delete(id);
     }
 
+    // Provides information necessary for the table
     public ArrayList<Object[]> getForTable(int size) {
         ArrayList<Object[]> hotelRowList = new ArrayList<>();
         for (Hotel obj : this.findAll()) {
@@ -52,6 +64,8 @@ public class HotelManager {
         }
         return hotelRowList;
     }
+
+    // Provides information necessary for the facilities table
     public ArrayList<Object[]> getForTableFacilities(int size) {
         ArrayList<Object[]> facilityRowList = new ArrayList<>();
         for (Hotel obj : this.findAll()) {
@@ -62,8 +76,9 @@ public class HotelManager {
         }
         return facilityRowList;
     }
+
+    // Retrieves a hotel by a specific ID
     public Hotel getById(int id) {
         return this.hotelDao.getById(id);
     }
-
 }

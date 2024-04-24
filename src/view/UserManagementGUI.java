@@ -10,14 +10,18 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class UserManagementGUI extends Layout{
+/**
+ * UserManagementGUI provides an interface for managing users.
+ * This class presents an interface for viewing, adding, updating, and deleting user information.
+ */
+public class UserManagementGUI extends Layout {
     private JPanel container;
     private JTabbedPane tabbedPane_table_user;
     private JButton btn_update;
     private JButton btn_delete;
     private JButton btn_add;
     private JLabel lbl_admin_panel;
-    private JComboBox cmbx_user_filter;
+    private JComboBox<String> cmbx_user_filter;
     private JLabel lbl_welcome;
     private JTable tbl_users;
     private JButton btn_logout;
@@ -34,30 +38,42 @@ public class UserManagementGUI extends Layout{
     private DefaultTableModel tmdl_users = new DefaultTableModel();
     private UserManager userManager;
 
+    /**
+     * Constructs a UserManagementGUI object.
+     * Initializes necessary objects and creates the user management interface.
+     * @param user The user who is currently logged in
+     */
     public UserManagementGUI(User user) {
         this.userManager = new UserManager();
         this.add(container);
-        this.guiInitilaze(1000, 500);
-        container.setPreferredSize(new Dimension(1000,500));
+        this.guiInitialize(1000, 500);
+        container.setPreferredSize(new Dimension(1000, 500));
         pnl_selected.setPreferredSize(new Dimension(100, pnl_selected.getPreferredSize().height));
         this.user = user;
         if (this.user == null) {
             dispose();
         }
-        this.lbl_welcome.setText("Welcome :  " + Helper.firstWordUpper(this.user.getNameSurname()));
+        this.lbl_welcome.setText("Welcome :  " + Helper.firstWordUpper(this.user.getFullName()));
 
-        // User Management
+        // Load user table and components
         loadUsersTable();
         loadUserComponent();
         this.tbl_users.setComponentPopupMenu(user_menu);
         logout();
     }
+
+    /**
+     * Loads the user table with user data.
+     */
     private void loadUsersTable() {
         Object[] col_user_list = {"ID", "Name Surname", "User", "Password", "Role"};
         ArrayList<Object[]> userList = this.userManager.getForTable(col_user_list.length);
         this.createTable(this.tmdl_users, this.tbl_users, col_user_list, userList);
     }
 
+    /**
+     * Loads components related to user management and sets up their functionality.
+     */
     private void loadUserComponent() {
         btn_update.addActionListener(e -> {
             int selectedUserId = this.getTableSelectedRow(tbl_users,0);
@@ -72,7 +88,6 @@ public class UserManagementGUI extends Layout{
             } else {
                 JOptionPane.showMessageDialog(UserManagementGUI.this, "Please select a user.", "No User Selected", JOptionPane.WARNING_MESSAGE);
             }
-
         });
 
         btn_delete.addActionListener(e -> {
@@ -171,16 +186,24 @@ public class UserManagementGUI extends Layout{
             }
         });
     }
+
+    /**
+     * Loads users based on their role and updates the user table.
+     * @param userList List of users to be loaded
+     */
     private void loadUsersByRole(ArrayList<User> userList) {
         tmdl_users.setRowCount(0);
         for (User user : userList) {
-            Object[] rowData = {user.getId(), user.getNameSurname(), user.getUser(), user.getPassword(), user.getRole()};
+            Object[] rowData = {user.getId(), user.getFullName(), user.getUserName(), user.getPassword(), user.getRole()};
             tmdl_users.addRow(rowData);
         }
         tbl_users.setModel(tmdl_users);
         txtf_selected_id.setText("No selected ID");
     }
 
+    /**
+     * Logs out the current user.
+     */
     public void logout(){
         btn_logout.addActionListener(e -> {
             dispose();

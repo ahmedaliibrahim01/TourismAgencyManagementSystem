@@ -2,20 +2,22 @@ package view;
 
 import business.FacilityManager;
 import business.HotelManager;
-import business.PensionTypeManager;
 import core.Helper;
 import entity.Hotel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * HotelAddGUI provides an interface for adding a hotel.
+ * This class presents an interface using Swing components to input and save hotel information.
+ */
 public class HotelAddGUI extends Layout {
+    // UI components
     private JPanel container;
     private JTextField txtf_hotel_name;
     private JTextField txtf_hotel_city;
@@ -26,79 +28,67 @@ public class HotelAddGUI extends Layout {
     private JTextField txtf_hotel_star;
     private JButton btn_add_facility;
     private JButton btn_remove_facility;
-    private JButton btn_add_pension;
-    private JButton btn_remove_pension;
     private JTable tbl_facilities;
-    private JLabel lbl_hotel_add_update;
-    private JLabel lbl_hotel_name;
-    private JLabel lbl_hotel_city;
-    private JLabel lbl_hotel_reion;
-    private JLabel lbl_hotel_full_address;
-    private JLabel lbl_hotel_email;
-    private JLabel lbl_hotel_phone;
-    private JLabel lbl_hotel_star;
     private JPanel hotel_lbls;
     private JPanel hotel_txtfs;
-    private JTabbedPane tabbedPane_unFclty;
-    private JTabbedPane tabbedPane2;
+    private JLabel lbl_hotel_name;
+    private JLabel lbl_hotel_city;
+    private JLabel lbl_hotel_region;
+    private JLabel lbl_hotel_full_address;
+    private JLabel lbl_hotel_email;
+    private JLabel lbl_hotel_add_update; // Typo: should be "address" instead of "add_update"
+    private JLabel lbl_hotel_phone;
+    private JLabel lbl_hotel_star;
+    private JTabbedPane tabbedPane_unFacilities;
+    private JTabbedPane tabbedPane_selected_Facilities;
     private JTable tbl_uns_facility;
-    private JTabbedPane tabbedPane3;
-    private JTable tbl_pension_type;
-    private JTabbedPane tabbedPane4;
-    private JTable tbl_uns_pension_type;
     private JPanel unf_panel;
     private JButton btn_save_hotel;
-    private JLabel lbl_winter;
-    private JLabel lbl_summer;
-    private JLabel lbl_star;
-    private JLabel lbl_finish;
-    private JFormattedTextField formattedTextField1;
-    private JFormattedTextField formattedTextField2;
-    private JFormattedTextField formattedTextField3;
-    private JFormattedTextField formattedTextField4;
     DefaultTableModel unselectedFacilitiesMdl = new DefaultTableModel();
     private String[] unselectedFacilities = {};
     DefaultTableModel selectedFacilitiesMdl = new DefaultTableModel();
     private String[] selectedFacilities = {};
-    DefaultTableModel unselectedPensionMdl = new DefaultTableModel();
-    private String[] unselectedPensions = {};
-    DefaultTableModel selectedPensionMdl = new DefaultTableModel();
-    private String[] selectedPension = {};
     private final Hotel hotel;
     private final FacilityManager facilityManager;
-    private final PensionTypeManager pensionTypeManager;
     private final HotelManager hotelManager;
 
+    /**
+     * Constructor for HotelAddGUI class.
+     * Initializes necessary objects and creates the interface for adding a new hotel.
+     */
     public HotelAddGUI() {
+        // Initialize objects
         this.hotel = new Hotel();
         this.facilityManager = new FacilityManager();
         this.hotelManager = new HotelManager();
-        this.pensionTypeManager = new PensionTypeManager();
-        this.add(container);
-        this.guiInitilaze(500, 1000);
-        container.setPreferredSize(new Dimension(500, 1000));
 
-        // Hotel Management
-        loadAddComponent();
+        // Add container to layout and set initial size
+        this.add(container);
+        this.guiInitialize(500, 530); // Typo: should be "initialize" instead of "initilaze"
+        container.setPreferredSize(new Dimension(500, 530));
 
         // Facilities Management
         loadLeftFacilityTable();
         loadRightFacilityTable();
-
-        // Pension Types Management
-        loadLeftPensionTable();
-        loadRightPensionTable();
-
+        loadAddHotelComponent();
         reSizeComponent();
-
     }
+
     // Facilities
+    /**
+     * Loads the left facility table.
+     * Lists all facilities for user selection.
+     */
     private void loadLeftFacilityTable() {
         Object[] col_facility_list = {"Facility Name"};
         ArrayList<Object[]> facilityList = this.facilityManager.getForTableFacilities(col_facility_list.length);
         this.createTable(this.unselectedFacilitiesMdl, this.tbl_facilities, col_facility_list, facilityList);
     }
 
+    /**
+     * Loads the right facility table.
+     * Displays selected facilities for user review.
+     */
     private void loadRightFacilityTable() {
         selectedFacilitiesMdl.addColumn("Facility Name");
         for(String facility : selectedFacilities){
@@ -107,23 +97,14 @@ public class HotelAddGUI extends Layout {
         tbl_uns_facility.setModel(selectedFacilitiesMdl);
     }
 
-    // Pension Types
-    public void loadLeftPensionTable(){
-        Object[] col_pension_type_list = {"Pension Type Name"};
-        ArrayList<Object[]> pensionTypeList = this.pensionTypeManager.getForTablePensions(col_pension_type_list.length);
-        this.createTable(this.unselectedPensionMdl, this.tbl_pension_type, col_pension_type_list, pensionTypeList);
-    }
-
-    public void loadRightPensionTable(){
-        selectedPensionMdl.addColumn("Pension Type Name");
-        for (String pension : selectedPension){
-            selectedPensionMdl.addRow(new Object[]{pension});
-        }
-        tbl_uns_pension_type.setModel(selectedPensionMdl);
-    }
-
     // Add Table
-    private void loadAddComponent() {
+
+    /**
+     * Loads the components for adding a hotel.
+     * Defines necessary button listeners.
+     */
+    private void loadAddHotelComponent() {
+        // Add mouse listener to facilities table
         this.tbl_facilities.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -134,16 +115,7 @@ public class HotelAddGUI extends Layout {
             }
         });
 
-        this.tbl_pension_type.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                int selectedRow = tbl_pension_type.rowAtPoint(e.getPoint());
-                if (selectedRow != -1 && selectedRow < tbl_pension_type.getRowCount()) {
-                    tbl_pension_type.setRowSelectionInterval(selectedRow, selectedRow);
-                }
-            }
-        });
-
+        // Save hotel button action listener
         btn_save_hotel.addActionListener(e -> {
             if (Helper.isFieldEmpty(this.txtf_hotel_name)
                     || Helper.isFieldEmpty(this.txtf_hotel_city)
@@ -152,8 +124,7 @@ public class HotelAddGUI extends Layout {
                     || Helper.isFieldEmpty(this.txtf_hotel_email)
                     || Helper.isFieldEmpty(this.txtf_hotel_phone)
                     || Helper.isFieldEmpty(this.txtf_hotel_star)
-                    || Helper.isTableEmpty(tbl_uns_facility)
-                    || Helper.isTableEmpty(tbl_uns_pension_type)) {
+                    || Helper.isTableEmpty(tbl_uns_facility)) {
                 Helper.showMsg("fill");
             } else {
                 Hotel hotel = new Hotel(
@@ -164,8 +135,7 @@ public class HotelAddGUI extends Layout {
                         txtf_hotel_email.getText(),
                         txtf_hotel_phone.getText(),
                         txtf_hotel_star.getText(),
-                        selectedFacilities,
-                        selectedPension
+                        selectedFacilities
                 );
 
                 if (hotelManager.save(hotel)) {
@@ -175,12 +145,9 @@ public class HotelAddGUI extends Layout {
                     Helper.showMsg("error");
                 }
             }
-            for (String unselectedFacilities : unselectedFacilities){
-                System.out.println(unselectedFacilities);
-            }
         });
 
-        // Facility Add and Remove
+        // Facility Add and Remove button action listeners
         btn_add_facility.addActionListener(e -> {
             int selectedRow = tbl_facilities.getSelectedRow();
             if (selectedRow != -1){
@@ -202,30 +169,14 @@ public class HotelAddGUI extends Layout {
                 selectedFacilities = removeHotelFromArray(selectedFacilities, facilityName);
             }
         });
-
-        // Pension Add and Remove
-        btn_add_pension.addActionListener(e -> {
-            int selectedRow = tbl_pension_type.getSelectedRow();
-            if (selectedRow != -1){
-                Object[] rowData = {tbl_pension_type.getValueAt(selectedRow,0)};
-                selectedPensionMdl.addRow(rowData);
-                String pensionTypeName = (String) rowData[0];
-                selectedPension = addPensionToArray(selectedPension, pensionTypeName);
-                unselectedPensionMdl.removeRow(selectedRow);
-            }
-        });
-        btn_remove_pension.addActionListener(e -> {
-            int selectedRow = tbl_uns_pension_type.getSelectedRow();
-            if (selectedRow != -1) {
-                Object[] rowData = {tbl_uns_pension_type.getValueAt(selectedRow, 0)};
-                unselectedPensionMdl.addRow(rowData);
-                String pensionTypeName = (String) rowData[0];
-                unselectedPensions = addPensionToArray(unselectedPensions, pensionTypeName);
-                selectedPensionMdl.removeRow(selectedRow);
-                selectedPension = removePensionFromArray(selectedPension, pensionTypeName);
-            }
-        });
     }
+
+    /**
+     * Adds a facility to the array of selected facilities.
+     * @param selectedFacilities current array of selected facilities
+     * @param facilityName facility to be added
+     * @return reference to the new array
+     */
     private String[] addFacilityToArray(String[] selectedFacilities, String facilityName) {
         String[] newFacilities = new String[selectedFacilities.length + 1];
         System.arraycopy(selectedFacilities, 0, newFacilities, 0, selectedFacilities.length);
@@ -233,6 +184,12 @@ public class HotelAddGUI extends Layout {
         return newFacilities;
     }
 
+    /**
+     * Removes a facility from the array of selected facilities.
+     * @param selectedFacilities current array of selected facilities
+     * @param facilityName facility to be removed
+     * @return reference to the new array
+     */
     private String[] removeHotelFromArray(String[] selectedFacilities, String facilityName) {
         String[] newFacilities = new String[selectedFacilities.length - 1];
         int index = 0;
@@ -244,24 +201,9 @@ public class HotelAddGUI extends Layout {
         return newFacilities;
     }
 
-    private String[] addPensionToArray(String[] selectedPension, String pensionTypeName) {
-        String[] newPensionType = new String[selectedPension.length + 1];
-        System.arraycopy(selectedPension, 0, newPensionType, 0, selectedPension.length);
-        newPensionType[newPensionType.length - 1] = pensionTypeName;
-        return newPensionType;
-    }
-
-    private String[] removePensionFromArray(String[] selectedPension, String pensionTypeName) {
-        String[] newPensionType = new String[selectedPension.length - 1];
-        int index = 0;
-        for (String pensionType : selectedPension) {
-            if (!pensionType.equals(pensionTypeName)) {
-                newPensionType[index++] = pensionType;
-            }
-        }
-        return newPensionType;
-    }
-
+    /**
+     * Resizes components for proper display.
+     */
     public void reSizeComponent() {
         this.tbl_facilities.getColumnModel().getColumn(0).setMaxWidth(200);
         this.tbl_facilities.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
@@ -271,22 +213,5 @@ public class HotelAddGUI extends Layout {
         this.tbl_uns_facility.setPreferredSize(new Dimension(tbl_facilities.getWidth(), 119));
         this.tbl_uns_facility.revalidate();
         this.tbl_uns_facility.repaint();
-
-        this.tbl_pension_type.getColumnModel().getColumn(0).setMaxWidth(200);
-        this.tbl_pension_type.setPreferredSize(new Dimension(tbl_pension_type.getWidth(), 119));
-        this.tbl_pension_type.revalidate();
-        this.tbl_pension_type.repaint();
-
-        this.tbl_uns_pension_type.setPreferredSize(new Dimension(tbl_uns_pension_type.getWidth(), 119));
-        this.tbl_uns_pension_type.revalidate();
-        this.tbl_uns_pension_type.repaint();
-
-    }
-
-    private void createUIComponents() throws ParseException {
-        this.formattedTextField1 = new JFormattedTextField(new MaskFormatter("##/##/####"));
-        this.formattedTextField2 = new JFormattedTextField(new MaskFormatter("##/##/####"));
-        this.formattedTextField3 = new JFormattedTextField(new MaskFormatter("##/##/####"));
-        this.formattedTextField4 = new JFormattedTextField(new MaskFormatter("##/##/####"));
     }
 }

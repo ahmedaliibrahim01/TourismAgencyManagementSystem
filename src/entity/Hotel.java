@@ -1,5 +1,7 @@
 package entity;
 
+import core.ComboItem;
+
 import java.util.Arrays;
 
 public class Hotel {
@@ -30,7 +32,7 @@ public class Hotel {
         this.pensionTypes = pensionTypes;
     }
 
-    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities, String[] pensionTypes) {
+    public Hotel(String name, String city, String region, String fullAddress, String phone, String email, String star, String[] facilities) {
         this.name = name;
         this.city = city;
         this.region = region;
@@ -39,7 +41,6 @@ public class Hotel {
         this.email = email;
         this.star = star;
         this.facilities = facilities;
-        this.pensionTypes = pensionTypes;
     }
 
 
@@ -121,6 +122,9 @@ public class Hotel {
 
     public void setPensionTypes(String[] pensionTypes) {
         this.pensionTypes = pensionTypes;
+    }
+    public ComboItem getComboItem() {
+        return new ComboItem(this.getId(), this.getName());
     }
 
     @Override

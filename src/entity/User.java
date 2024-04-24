@@ -1,37 +1,44 @@
 package entity;
 
+/**
+ * Represents a user entity in the system.
+ */
 public class User {
     private int id;
-    private String nameSurname;
-    private String user;
+    private String fullName;
+    private String userName;
     private String password;
     private Role role;
 
+    // Constructors and methods...
     public User() {
     }
 
     public User(int id, String nameSurname, String user, String password, Role role) {
         this.id = id;
-        this.nameSurname = nameSurname;
-        this.user = user;
+        this.fullName = nameSurname;
+        this.userName = user;
         this.password = password;
         this.role = role;
     }
 
+    /**
+     * Enumeration representing roles of users in the system.
+     */
     public enum Role{
         ADMIN,
         EMPLOYEE
     }
 
     public User(String nameSurname, String user, String password, Role role) {
-        this.nameSurname = nameSurname;
-        this.user = user;
+        this.fullName = nameSurname;
+        this.userName = user;
         this.password = password;
         this.role = role;
     }
 
     public User(String user, String password) {
-        this.user = user;
+        this.userName = user;
         this.password = password;
     }
 
@@ -43,20 +50,20 @@ public class User {
         this.id = id;
     }
 
-    public String getNameSurname() {
-        return nameSurname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNameSurname(String nameSurname) {
-        this.nameSurname = nameSurname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -79,8 +86,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", nameSurname='" + nameSurname + '\'' +
-                ", user='" + user + '\'' +
+                ", nameSurname='" + fullName + '\'' +
+                ", user='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
