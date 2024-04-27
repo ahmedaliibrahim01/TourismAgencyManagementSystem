@@ -4,7 +4,7 @@
 ## Description
 Tourism Agency Promotional Video
 
-Link : https://youtu.be/8WHovsgwcWE
+Link : https://drive.google.com/drive/folders/1v4aX8t81EfQar818K_pRkrHmEdlIcigX?usp=sharing
 
 This project aims to create a digital management system for Patika Tourism Agency to streamline its daily operations in the hotel sector and optimize customer reservation processes.
 
